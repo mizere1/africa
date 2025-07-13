@@ -1274,6 +1274,14 @@ async function ensureSampleDataIsPopulated() {
 
 // --- DOMContentLoaded Initial Setup ---
 document.addEventListener('DOMContentLoaded', async () => { 
+    const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (mobileNavToggle) {
+        mobileNavToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
     console.log("DOMContentLoaded: START");
     loginForm = document.getElementById('login-form');
     signupForm = document.getElementById('signup-form');
