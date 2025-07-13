@@ -47,13 +47,17 @@
     </style>
 </head>
 <body class="learning-page-body">
-    <aside class="sidebar">
-        <a href="index.html" class="logo">
-            <img src="https://res.cloudinary.com/djuhngvo7/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1752329058/royal_african_college_transparent_1_v5gdmr.png" alt="Royal African College Logo" />
-        </a>
-        <nav>
+    <nav class="top-nav">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="https://res.cloudinary.com/djuhngvo7/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1752329058/royal_african_college_transparent_1_v5gdmr.png" alt="Royal African College Logo" />
+            </a>
+            <button class="mobile-nav-toggle">
+                <span class="hamburger"></span>
+            </button>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#all-courses">Programmes</a></li>
                 <li id="student-chat-nav-link" class="hidden"><a href="chat.html">Chat</a></li>
                 <li id="announcements-nav-link"><a href="dashboard.html#platform-news-section">Announcements</a></li>
                 <li id="admin-nav-link" class="hidden"><a href="admin.html">Admin</a></li>
@@ -61,8 +65,8 @@
                 <li id="profile-nav-link" class="hidden"><a href="profile.html">Profile</a></li> 
                 <li id="auth-status"><a href="#" id="login-logout">Login</a></li>
             </ul>
-        </nav>
-    </aside>
+        </div>
+    </nav>
 
     <main id="learning-page" class="container learning-content-container">
         <h1 id="learning-course-title">Loading Course...</h1>
@@ -91,9 +95,8 @@
                 <div class="footer-section">
                     <h4>Contact Us</h4>
                     <ul>
-                        <li>Email: info@rac.ac.mw</li>
-                        <li>Phone: +265 1 234 567</li>
-                        <li>Address: Zomba, Malawi</li>
+                        <li><a href="mailto:excellenceassured3@gmail.com" class="btn">Email Us</a></li>
+                        <li><a href="https://wa.me/265996982449" class="btn">WhatsApp Us</a></li>
                     </ul>
                 </div>
             </div>

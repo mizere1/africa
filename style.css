@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Merriweather:wght@400;700&display=swap');
 
 :root {
     --primary-navy-blue: #00274D;
@@ -15,12 +15,13 @@
 /* General Styles */
 body {
     font-family: 'Inter', sans-serif;
+    font-size: 16px;
     margin: 0;
     padding: 0;
     background-color: var(--secondary-cool-gray); /* Light gray background */
     color: var(--text-dark); /* Dark text on light background */
     line-height: 1.6;
-    padding-left: 268px; /* sidebar width + padding */
+    padding-top: 70px; /* Same as nav height */
 }
 
 .container {
@@ -32,7 +33,7 @@ body {
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Merriweather', serif;
     font-weight: 700;
     color: var(--primary-navy-blue);
     margin-top: 0;
@@ -40,22 +41,22 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 48px;
+    font-size: 2.5rem; /* 40px */
     margin-bottom: 0.5em;
 }
 
 h2 {
-    font-size: 36px;
+    font-size: 2rem; /* 32px */
     margin-bottom: 0.5em;
 }
 
 h3 {
-    font-size: 24px;
+    font-size: 1.5rem; /* 24px */
     margin-bottom: 0.5em;
 }
 
 h4 {
-    font-size: 20px;
+    font-size: 1.25rem; /* 20px */
 }
 
 p {
@@ -74,48 +75,41 @@ a:hover {
     text-decoration: underline;
 }
 
-.sidebar {
-    width: 220px;
-    height: 100vh;
+.top-nav {
+    background-color: #fff;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.5em 1em;
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #fff;
-    padding: 24px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    right: 0;
+    z-index: 1000;
 }
 
-.sidebar .logo img {
-    width: 100%;
-    max-width: 150px;
-    margin-bottom: 2em;
-    border: 3px solid var(--accent-gold);
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+.top-nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.sidebar .nav-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.top-nav .logo img {
+    height: 40px;
 }
 
-.sidebar .nav-links li {
-    margin-bottom: 16px;
+.top-nav .nav-links {
+    display: flex;
+    gap: 1em;
 }
 
-.sidebar .nav-links a {
-    display: block;
-    padding: 0.5em 1em;
-    color: var(--primary-navy-blue);
+.top-nav .nav-links a {
+    color: var(--text-dark);
     text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.3s;
+    padding: 0.5em;
+    transition: color 0.3s;
 }
 
-.sidebar .nav-links a:hover {
-    background-color: var(--primary-navy-blue);
-    color: #fff;
+.top-nav .nav-links a:hover {
+    color: var(--accent-gold);
 }
 
 /* Auth Section (Login/Signup on Home Page) */
@@ -254,6 +248,7 @@ body #hero {
 /* Page Content */
 .page-content {
     padding: 48px;
+    min-height: calc(100vh - 140px); /* 70px for nav and 70px for footer */
 }
 #welcome-message {
     text-align: center;
@@ -489,40 +484,14 @@ footer {
         width: 95%;
     }
 
-    nav .container {
-        flex-direction: row;
-        justify-content: space-between;
+    .top-nav .container {
+        flex-wrap: wrap;
     }
 
-    .mobile-nav-toggle {
-        display: block;
-    }
-
-    nav ul {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background-color: #fff;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    nav ul.active {
-        display: flex;
-    }
-
-    nav ul li {
-        margin: 0;
-        width: 100%;
-        text-align: center;
-    }
-
-    nav ul li a {
-        display: block;
-        padding: 1em;
-        border-bottom: 1px solid #f0f0f0;
+    .top-nav .nav-links {
+        flex-basis: 100%;
+        justify-content: center;
+        order: 3;
     }
 
     .course-list {
