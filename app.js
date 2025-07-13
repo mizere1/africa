@@ -629,47 +629,6 @@ function initializeAdminPageLogic(adminUser, adminUserData) {
     }
 
     loadAllCoursesForAdmin();
-    initializeAccordion();
-}
-
-function initializeAccordion() {
-    const accordionHeaders = document.querySelectorAll('.accordion-header');
-
-    // Set the first section to be open by default
-    const firstHeader = accordionHeaders[0];
-    if (firstHeader) {
-        firstHeader.classList.add('active');
-        const firstContent = firstHeader.nextElementSibling;
-        if (firstContent && firstContent.classList.contains('accordion-content')) {
-            firstContent.style.maxHeight = firstContent.scrollHeight + "px";
-            firstContent.classList.add('active');
-        }
-    }
-
-    accordionHeaders.forEach(header => {
-        header.addEventListener('click', () => {
-            const currentlyActiveHeader = document.querySelector('.accordion-header.active');
-            
-            // If the clicked header is not the currently active one, close the active one
-            if (currentlyActiveHeader && currentlyActiveHeader !== header) {
-                currentlyActiveHeader.classList.remove('active');
-                const activeContent = currentlyActiveHeader.nextElementSibling;
-                activeContent.style.maxHeight = null;
-                activeContent.classList.remove('active');
-            }
-
-            // Toggle the clicked header
-            header.classList.toggle('active');
-            const content = header.nextElementSibling;
-            if (content.style.maxHeight) {
-                content.style.maxHeight = null; // Close it
-                content.classList.remove('active');
-            } else {
-                content.style.maxHeight = content.scrollHeight + "px"; // Open it
-                content.classList.add('active');
-            }
-        });
-    });
 }
 
 function initializeLearningPage(user, userData) {
