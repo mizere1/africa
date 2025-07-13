@@ -1,37 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-    /* New University Palette */
     --primary-navy-blue: #00274D;
     --accent-gold: #FFB81C;
-    --secondary-cool-gray: #F5F5F5;
-    --contrast-dark-green: #14532D; /* For accents or specific highlights */
-
-    /* Text Colors */
-    --text-dark: #333333; /* Default dark text on light backgrounds */
-    --text-light: #FFFFFF; /* Default light text on dark backgrounds */
-    --text-medium-gray: #555555; /* For less prominent text */
-
-    /* Supporting Colors (can be derived or specified) */
-    --border-color: #DDDDDD; /* Light border for cards/dividers on light backgrounds */
-    --link-hover-color: #EAA800; /* Darker gold for hover */
-
-    /* Previous colors (to be phased out or remapped) */
-    /* --royal-blue: #1A237E; (Replaced by navy blue) */
-    /* --carbon-black: #121212; (Replaced by cool gray for body bg) */
-    /* --cyan-glow: #00B8D4; (No direct replacement, gold is main accent) */
-    /* --mit-red: #A31F34; (No direct replacement) */
+    --secondary-cool-gray: #f8f9fa;
+    --contrast-dark-green: #14532D;
+    --text-dark: #000;
+    --text-light: #fff;
+    --text-medium-gray: #6c757d;
+    --border-color: #dee2e6;
+    --link-hover-color: #EAA800;
 }
 
 /* General Styles */
 body {
-    font-family: 'Lato', sans-serif; /* Sans-serif for body text */
+    font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--secondary-cool-gray); /* Light gray background */
     color: var(--text-dark); /* Dark text on light background */
-    line-height: 1.7; 
-    padding-left: 220px; /* Same as sidebar width + padding */
+    line-height: 1.6;
+    padding-left: 268px; /* sidebar width + padding */
 }
 
 .container {
@@ -42,31 +31,31 @@ body {
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 { 
-    font-family: 'Merriweather', serif; /* Serif for headers */
-    font-weight: 700; /* Bold for headers */
-    color: var(--primary-navy-blue); /* Navy blue for headers */
-    margin-top: 0; 
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: var(--primary-navy-blue);
+    margin-top: 0;
+    line-height: 1.3;
 }
 
 h1 {
-    font-size: 2.6em; 
-    margin-bottom: 0.8em; 
+    font-size: 48px;
+    margin-bottom: 0.5em;
 }
 
 h2 {
-    font-size: 2.2em;
-    margin-bottom: 0.75em;
-    padding-bottom: 0.3em;
+    font-size: 36px;
+    margin-bottom: 0.5em;
 }
 
 h3 {
-    font-size: 1.8em; 
+    font-size: 24px;
     margin-bottom: 0.5em;
 }
 
 h4 {
-    font-size: 1.4em; 
+    font-size: 20px;
 }
 
 p {
@@ -86,13 +75,13 @@ a:hover {
 }
 
 .sidebar {
-    width: 200px;
+    width: 220px;
     height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
     background-color: #fff;
-    padding: 1em;
+    padding: 24px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
 }
 
@@ -109,7 +98,7 @@ a:hover {
 }
 
 .sidebar .nav-links li {
-    margin-bottom: 1em;
+    margin-bottom: 16px;
 }
 
 .sidebar .nav-links a {
@@ -261,8 +250,7 @@ header#auth-section.hidden {
 
 /* Page Content */
 .page-content {
-    padding-top: 2.5em;
-    padding-bottom: 2.5em;
+    padding: 48px;
 }
 #welcome-message {
     text-align: center;
