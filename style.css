@@ -31,6 +31,7 @@ body {
     background-color: var(--secondary-cool-gray); /* Light gray background */
     color: var(--text-dark); /* Dark text on light background */
     line-height: 1.7; 
+    padding-left: 220px; /* Same as sidebar width + padding */
 }
 
 .container {
@@ -84,96 +85,45 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Header/Navigation */
-nav {
-    background-color: #fff;
-    color: var(--primary-navy-blue);
-    padding: 1em 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    position: sticky;
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    position: fixed;
     top: 0;
-    z-index: 1000;
-    width: 100%;
+    left: 0;
+    background-color: #fff;
+    padding: 1em;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
 }
 
-nav .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.sidebar .logo {
+    display: block;
+    margin-bottom: 2em;
+    text-align: center;
 }
 
-nav .logo {
-    color: var(--primary-navy-blue);
-    font-weight: 700;
-    font-size: 1.6em;
-    font-family: 'Merriweather', serif;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-nav ul {
+.sidebar .nav-links {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
-    align-items: center;
 }
 
-nav ul li {
-    margin-left: 20px;
+.sidebar .nav-links li {
+    margin-bottom: 1em;
 }
 
-nav ul li a {
-    color: var(--primary-navy-blue);
-    font-weight: 500;
-    font-family: 'Lato', sans-serif;
-    padding: 0.6em 1em;
-    border-radius: 4px;
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-    text-transform: uppercase;
-    font-size: 0.9em;
-}
-
-nav ul li a:hover,
-nav ul li a.active {
-    background-color: var(--primary-navy-blue);
-    color: #fff;
-    text-decoration: none;
-}
-
-.mobile-nav-toggle {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.mobile-nav-toggle .hamburger {
-    width: 25px;
-    height: 3px;
-    background-color: var(--primary-navy-blue);
+.sidebar .nav-links a {
     display: block;
-    position: relative;
+    padding: 0.5em 1em;
+    color: var(--primary-navy-blue);
+    text-decoration: none;
+    border-radius: 4px;
     transition: background-color 0.3s;
 }
 
-.mobile-nav-toggle .hamburger::before,
-.mobile-nav-toggle .hamburger::after {
-    content: '';
-    width: 25px;
-    height: 3px;
+.sidebar .nav-links a:hover {
     background-color: var(--primary-navy-blue);
-    display: block;
-    position: absolute;
-    transition: transform 0.3s;
-}
-
-.mobile-nav-toggle .hamburger::before {
-    top: -8px;
-}
-
-.mobile-nav-toggle .hamburger::after {
-    bottom: -8px;
+    color: #fff;
 }
 
 /* Auth Section (Login/Signup on Home Page) */
