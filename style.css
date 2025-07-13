@@ -85,10 +85,10 @@ a:hover {
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
 }
 
-.sidebar .logo {
-    display: block;
+.sidebar .logo img {
+    width: 100%;
+    max-width: 150px;
     margin-bottom: 2em;
-    text-align: center;
 }
 
 .sidebar .nav-links {
@@ -211,7 +211,7 @@ header#auth-section.hidden {
 
 /* Hero Section */
 #hero {
-    background: url('https://www.unima.ac.mw/images/slider/slide1.jpg') no-repeat center center/cover;
+    background: url('https://res.cloudinary.com/djuhngvo7/image/upload/v1752328857/ChatGPT_Image_Jul_12_2025_04_00_37_PM_oa83dd.png') no-repeat center center/cover;
     height: 60vh;
     display: flex;
     align-items: center;
