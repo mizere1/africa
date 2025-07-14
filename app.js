@@ -1322,6 +1322,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         hamburger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
+
+        const links = navLinks.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
     }
 
     console.log("DOMContentLoaded: START");
