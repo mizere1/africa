@@ -100,6 +100,7 @@ nav .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 nav .logo {
@@ -135,10 +136,27 @@ nav ul li a {
 }
 
 nav ul li a:hover,
-nav ul li a.active { 
-    background-color: var(--accent-gold); 
-    color: var(--primary-navy-blue); /* Dark text on gold background */
+nav ul li a.active {
+    background-color: var(--accent-gold);
+    color: var(--primary-navy-blue);
     text-decoration: none;
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px 0;
+    background-color: var(--text-light);
+    transition: all 0.3s ease-in-out;
 }
 
 /* Auth Section (Login/Signup on Home Page) */
@@ -292,19 +310,20 @@ header#auth-section.hidden {
 /* Buttons */
 .btn {
     display: inline-block;
-    background-color: var(--accent-gold); 
-    color: var(--primary-navy-blue); /* Dark text on gold */
-    padding: 12px 25px;
-    border: none;
-    border-radius: 5px;
+    background-color: var(--accent-gold);
+    color: var(--primary-navy-blue);
+    padding: 12px 28px;
+    border: 1px solid transparent;
+    border-radius: 25px; /* Rounded buttons */
     cursor: pointer;
     text-align: center;
-    font-size: 0.95em; 
-    transition: background-color 0.3s ease, color 0.3s ease;
-    font-weight: 700; /* Lato bold */
+    font-size: 1em;
+    transition: all 0.3s ease;
+    font-weight: 700;
     font-family: 'Lato', sans-serif;
-    letter-spacing: 0.5px; 
-    text-transform: uppercase; 
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .btn:hover {
@@ -498,84 +517,146 @@ footer {
     margin-top: 25px; 
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Responsive Design - Mobile First */
+
+/* Base styles for mobile */
+.container {
+    width: 95%;
+}
+
+.hamburger {
+    display: block;
+}
+
+nav .container {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+nav .logo {
+    margin-bottom: 10px;
+}
+
+nav ul {
+    margin-top: 10px;
+    flex-direction: column;
+    width: 100%;
+    display: none; /* Hidden by default on mobile */
+}
+
+nav ul.active {
+    display: flex; /* Shown when hamburger is clicked */
+}
+
+nav ul li {
+    margin-left: 0;
+    margin-bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+nav ul li a {
+    display: block;
+    padding: 10px 0;
+}
+
+.course-list {
+    grid-template-columns: 1fr;
+}
+
+h1 { font-size: 2em; }
+h2 { font-size: 1.7em; }
+h3 { font-size: 1.4em; }
+
+.auth-form {
+    padding: 1.5em;
+    max-width: 100%;
+}
+
+.footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.footer-logo, .footer-links {
+    flex: none;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.footer-links ul {
+    display: inline-block;
+    text-align: center;
+}
+
+#profile-page .page-content, #dashboard-page .page-content, #admin-page .page-content, #course-detail-page .page-content {
+    padding: 1em;
+}
+
+.course-card { padding: 20px; }
+
+#modules-list li, #announcements-list li, #platform-news-list li, #upcoming-assignments-list li, .assessment-item {
+    padding: 15px;
+}
+
+.btn, button, .auth-form button {
+    font-size: 0.9em;
+    padding: 12px 18px;
+}
+
+/* Tablet styles */
+@media (min-width: 768px) {
     .container {
-        width: 95%;
+        width: 90%;
     }
 
-    nav .container {
-        flex-direction: column;
-        align-items: center; /* Center nav items */
+    .hamburger {
+        display: none;
     }
+
     nav .logo {
-        margin-bottom: 10px;
+        margin-bottom: 0;
     }
 
     nav ul {
-        margin-top: 10px;
-        flex-direction: column;
-        width: 100%;
+        display: flex;
+        flex-direction: row;
+        width: auto;
+        margin-top: 0;
     }
 
     nav ul li {
-        margin-left: 0;
-        margin-bottom: 8px;
-        width: 100%;
-        text-align: center;
+        margin-left: 20px;
+        margin-bottom: 0;
+        width: auto;
     }
+
     nav ul li a {
-        display: block;
-        padding: 10px 0;
+        padding: 0.6em 1em;
     }
 
     .course-list {
-        grid-template-columns: 1fr; 
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     }
 
     h1 { font-size: 2.2em; }
     h2 { font-size: 1.9em; }
     h3 { font-size: 1.6em; }
 
-    .auth-form {
-        padding: 1.5em;
-        max-width: 100%;
-    }
-    .footer-content {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    .footer-logo, .footer-links {
-        flex: none; 
-        width: 100%;
-        margin-bottom: 25px;
-    }
-    .footer-links ul {
-        display: inline-block; 
-        text-align: center; 
-    }
     #profile-page .page-content, #dashboard-page .page-content, #admin-page .page-content, #course-detail-page .page-content {
         padding: 1.5em;
     }
 }
 
-@media (max-width: 480px) {
-    nav .logo { font-size: 1.4em; }
-    h1 { font-size: 2em; }
-    h2 { font-size: 1.7em; }
-    h3 { font-size: 1.4em; }
+/* Desktop styles */
+@media (min-width: 1024px) {
+    h1 { font-size: 2.6em; }
+    h2 { font-size: 2.2em; }
+    h3 { font-size: 1.8em; }
 
-    .btn, button, .auth-form button { 
-        font-size: 0.9em;
-        padding: 12px 18px; 
-    }
     #profile-page .page-content, #dashboard-page .page-content, #admin-page .page-content, #course-detail-page .page-content {
-        padding: 1em;
-    }
-    .course-card { padding: 20px; }
-    #modules-list li, #announcements-list li, #platform-news-list li, #upcoming-assignments-list li, .assessment-item {
-        padding: 15px;
+        padding: 2em;
     }
 }
 

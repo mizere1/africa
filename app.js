@@ -1314,7 +1314,16 @@ async function ensureSampleDataIsPopulated() {
 }
 
 // --- DOMContentLoaded Initial Setup ---
-document.addEventListener('DOMContentLoaded', async () => { 
+document.addEventListener('DOMContentLoaded', async () => {
+    const hamburger = document.getElementById('hamburger-menu');
+    const navLinks = document.getElementById('nav-links');
+
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
     console.log("DOMContentLoaded: START");
     loginForm = document.getElementById('login-form');
     signupForm = document.getElementById('signup-form');
