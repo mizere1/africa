@@ -3,17 +3,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.getElementById('nav-links');
 
     if (hamburger && navLinks) {
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+            }
         });
 
-        const links = navLinks.querySelectorAll('a');
-        links.forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth < 768) {
-                    navLinks.classList.remove('active');
-                }
-            });
+        document.addEventListener('click', (e) => {
+            if (navLinks.style.display === 'flex' && !navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+                navLinks.style.display = 'none';
+            }
+        });
+    }
+
+    // Modal logic
+    const userManagementBtn = document.getElementById('user-management-btn');
+    const modal = document.getElementById('user-management-modal');
+    const closeBtn = document.querySelector('.close-btn');
+
+    if (userManagementBtn && modal && closeBtn) {
+        userManagementBtn.addEventListener('click', () => {
+            modal.style.display = 'block';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
         });
     }
 });
