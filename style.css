@@ -8,13 +8,13 @@ Main stylesheet for the University Portal.
 /* CSS Variables for color palette */
 :root {
     /* New University Palette */
-    --primary-navy-blue: #00274D;
+    --primary-navy-blue: #FFFFFF;
     --accent-gold: #FFB81C;
     --secondary-cool-gray: #F5F5F5;
     --contrast-dark-green: #14532D; /* For accents or specific highlights */
 
     /* Text Colors */
-    --text-dark: #333333; /* Default dark text on light backgrounds */
+    --text-dark: #000000; /* Default dark text on light backgrounds */
     --text-light: #FFFFFF; /* Default light text on dark backgrounds */
     --text-medium-gray: #555555; /* For less prominent text */
 
