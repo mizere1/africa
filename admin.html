@@ -5,68 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - University Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="premium.css">
+    <style>
+        body {
+            font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+            background: #FFFFFF;
+            color: #0A0A08;
+            line-height: 1.6;
+        }
+        main {
+            padding: 2em;
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
-        <div class="logo-container">
-            <img src="https://res.cloudinary.com/djuhngvo7/image/upload/v1752329058/royal_african_college_transparent_1_v5gdmr.png" alt="Royal African College Logo" class="university-logo">
-            <span class="logo-text">Royal African College</span>
-        </div>
+    <header>
+        <h1>Admin</h1>
         <nav>
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="index.html#all-courses" class="nav-link">Courses</a>
-            <a href="chat.html" class="nav-link">Chat</a>
-            <a href="dashboard.html#platform-news-section" class="nav-link">Announcements</a>
-            <a href="admin.html" class="nav-link">Admin</a>
-            <a href="#" class="nav-link">Contact</a>
-            <a href="profile.html" class="nav-link">Profile</a>
-            <a href="#" id="login-logout" class="nav-link">Login</a>
+            <a href="index.html">Home</a>
+            <a href="admin.html">Admin</a>
         </nav>
     </header>
 
     <main>
-        <section class="features">
-            <div class="feature-card">
-                <h3>Create New Course</h3>
-                <form id="create-course-form">
-                    <div>
-                        <label for="course-title">Course Title:</label>
-                        <input type="text" id="course-title-input" required>
-                    </div>
-                    <div>
-                        <label for="course-code">Course Code:</label>
-                        <input type="text" id="course-code-input" placeholder="e.g., CS101" required>
-                    </div>
-                    <div>
-                        <label for="course-description">Course Description:</label>
-                        <textarea id="course-description-input" required></textarea>
-                    </div>
-                    <div>
-                        <label for="course-credits">Credit Hours:</label>
-                        <input type="number" id="course-credits-input" min="0" step="0.5" required>
-                    </div>
-                    <div>
-                        <label for="course-modules">Legacy Module Titles (one title per line, will be placed in a default 'Modules' section):</label>
-                        <textarea id="course-modules-input" placeholder="Introduction to Topic A\nAdvanced Topic B\nPractical Applications"></textarea>
-                    </div>
-                    <div>
-                        <label for="course-creation-term-select">Assign to Academic Term:</label>
-                        <select id="course-creation-term-select" required>
-                            <option value="">-- Select Term --</option>
-                            <!-- Terms will be populated by JavaScript -->
-                        </select>
-                    </div>
-                    <button type="submit" class="cta-button">Create Course</button>
-                </form>
-                <p id="create-course-message" style="margin-top: 1em;"></p>
-            </div>
+        <section>
+            <h2>Create New Course</h2>
+            <form id="create-course-form">
+                <div>
+                    <label for="course-title">Course Title:</label>
+                    <input type="text" id="course-title-input" required>
+                </div>
+                <div>
+                    <label for="course-code">Course Code:</label>
+                    <input type="text" id="course-code-input" placeholder="e.g., CS101" required>
+                </div>
+                <div>
+                    <label for="course-description">Course Description:</label>
+                    <textarea id="course-description-input" required></textarea>
+                </div>
+                <div>
+                    <label for="course-credits">Credit Hours:</label>
+                    <input type="number" id="course-credits-input" min="0" step="0.5" required>
+                </div>
+                <div>
+                    <label for="course-modules">Legacy Module Titles (one title per line, will be placed in a default 'Modules' section):</label>
+                    <textarea id="course-modules-input" placeholder="Introduction to Topic A\nAdvanced Topic B\nPractical Applications"></textarea>
+                </div>
+                <div>
+                    <label for="course-creation-term-select">Assign to Academic Term:</label>
+                    <select id="course-creation-term-select" required>
+                        <option value="">-- Select Term --</option>
+                        <!-- Terms will be populated by JavaScript -->
+                    </select>
+                </div>
+                <button type="submit">Create Course</button>
+            </form>
+            <p id="create-course-message" style="margin-top: 1em;"></p>
         </section>
     </main>
-
-    <footer class="footer">
-        <p>&copy; 2024 University Portal. All rights reserved.</p>
-    </footer>
 
     <script type="module" src="firebase-config.js"></script>
     <script type="module" src="app.js"></script>
