@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Course Management</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <style>
+    </style>
 </head>
 <body>
     <nav>
         <div class="container">
             <a href="index.html" class="logo"><img src="https://res.cloudinary.com/djuhngvo7/image/upload/v1752329058/royal_african_college_transparent_1_v5gdmr.png" alt="Royal African College Logo" style="height: 40px;"></a>
-            <ul>
+            <button class="hamburger-menu" id="hamburger-menu" aria-label="Open Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="index.html#all-courses">Courses</a></li>
                 <li id="student-chat-nav-link" class="hidden"><a href="chat.html">Chat</a></li>
@@ -24,11 +30,11 @@
         </div>
     </nav>
 
-    <main id="admin-page" class="container page-content">
+    <main id="admin-page" class="container">
         <h1>Admin Dashboard</h1>
 
         <div>
-            <h2>Create New Course</h2>
+            <h3>Create New Course</h3>
             <form id="create-course-form">
                 <div>
                     <label for="course-title">Course Title:</label>
@@ -63,172 +69,180 @@
         </div>
 
         <div>
-            <h2>Manage Course Content</h2>
+            <h3>Manage Course Content</h3>
             <div>
-                <label for="admin-course-select">Select Course to Manage:</label>
-                <select id="admin-course-select">
-                    <option value="">-- Select a Course --</option>
-                    <!-- Courses will be populated by JS -->
-                </select>
-            </div>
+                <div>
+                    <label for="admin-course-select">Select Course to Manage:</label>
+                    <select id="admin-course-select">
+                        <option value="">-- Select a Course --</option>
+                        <!-- Courses will be populated by JS -->
+                    </select>
+                </div>
 
-            <div id="course-content-editor" class="hidden">
+                <div id="course-content-editor" class="hidden">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1em;">
                     <h3 id="editing-course-title" style="margin: 0;"></h3>
                     <button id="delete-course-btn" class="btn btn-danger">Delete This Course</button>
                 </div>
-                <div id="course-sections-container">
-                    <!-- Sections will be rendered here by JS -->
+                    <div id="course-sections-container">
+                        <!-- Sections will be rendered here by JS -->
+                    </div>
+                    <div id="add-section-form-container">
+                        <h4>Add New Section</h4>
+                        <form id="add-section-form">
+                            <input type="text" id="new-section-title" placeholder="Enter new section title (e.g., Semester 1)" required>
+                            <button type="submit" class="btn">Add Section</button>
+                        </form>
+                    </div>
                 </div>
-                <div id="add-section-form-container">
-                    <h4>Add New Section</h4>
-                    <form id="add-section-form">
-                        <input type="text" id="new-section-title" placeholder="Enter new section title (e.g., Semester 1)" required>
-                        <button type="submit" class="btn">Add Section</button>
-                    </form>
-                </div>
-            </div>
 
-            <!-- Templates for adding content to sections -->
-            <div id="content-templates" class="hidden">
-                <div class="add-content-form" id="add-video-form-template">
-                    <h5>Add New Video</h5>
-                    <input type="text" class="content-title-input" placeholder="Video Title" required>
-                    <input type="url" class="content-url-input" placeholder="https://youtube.com/watch?v=..." required>
-                    <button type="button" class="btn btn-sm add-content-btn" data-type="video">Add Video</button>
-                </div>
-                <div class="add-content-form" id="add-pdf-form-template">
-                    <h5>Add New PDF</h5>
-                    <input type="text" class="content-title-input" placeholder="PDF Document Title" required>
-                    <input type="url" class="content-url-input" placeholder="https://example.com/document.pdf" required>
-                    <button type="button" class="btn btn-sm add-content-btn" data-type="pdf">Add PDF</button>
-                </div>
-                <div class="add-content-form" id="add-module-form-template">
-                    <h5>Add New Module</h5>
-                    <input type="text" class="content-title-input" placeholder="Module Title" required>
-                    <textarea class="content-text-input" placeholder="Module content..."></textarea>
-                    <button type="button" class="btn btn-sm add-content-btn" data-type="module">Add Module</button>
-                </div>
-            </div>
-        </div>
-
-        <div>
-            <h2>User Management</h2>
-            <div id="admin-user-list-container">
-                <label for="admin-user-select">Select User:</label>
-                <select id="admin-user-select" style="margin-bottom: 1em; padding: 8px; min-width: 300px;">
-                    <option value="">Loading users...</option>
-                </select>
-            </div>
-
-            <div id="admin-selected-user-details" class="hidden">
-                <h3 id="admin-selected-user-name"></h3>
-
-                <h4>Fees Management</h4>
-                <p>Current Fees Balance: <strong id="admin-selected-user-fees">N/A</strong></p>
-                <div>
-                    <label for="admin-new-fees-amount">Set New Amount:</label>
-                    <input type="number" id="admin-new-fees-amount" placeholder="e.g., 27500" step="any">
-                </div>
-                <div>
-                    <label for="admin-new-fees-currency">Currency:</label>
-                    <input type="text" id="admin-new-fees-currency" value="MWK">
-                </div>
-                <button id="admin-update-fees-btn" class="btn">Update Fees</button>
-                <p id="admin-update-fees-message" style="margin-top: 0.5em;"></p>
-
-                <h4>Enrollment Approvals</h4>
-                <div id="admin-pending-enrollments">
-                    <p>Select a user to see pending enrollments.</p>
+                <!-- Templates for adding content to sections -->
+                <div id="content-templates" class="hidden">
+                    <div class="add-content-form" id="add-video-form-template">
+                        <h5>Add New Video</h5>
+                        <input type="text" class="content-title-input" placeholder="Video Title" required>
+                        <input type="url" class="content-url-input" placeholder="https://youtube.com/watch?v=..." required>
+                        <button type="button" class="btn btn-sm add-content-btn" data-type="video">Add Video</button>
+                    </div>
+                    <div class="add-content-form" id="add-pdf-form-template">
+                        <h5>Add New PDF</h5>
+                        <input type="text" class="content-title-input" placeholder="PDF Document Title" required>
+                        <input type="url" class="content-url-input" placeholder="https://example.com/document.pdf" required>
+                        <button type="button" class="btn btn-sm add-content-btn" data-type="pdf">Add PDF</button>
+                    </div>
+                    <div class="add-content-form" id="add-module-form-template">
+                        <h5>Add New Module</h5>
+                        <input type="text" class="content-title-input" placeholder="Module Title" required>
+                        <textarea class="content-text-input" placeholder="Module content..."></textarea>
+                        <button type="button" class="btn btn-sm add-content-btn" data-type="module">Add Module</button>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div>
-            <h2>Post Platform Update/Announcement</h2>
-            <form id="platform-update-form">
-                <div>
-                    <label for="platform-update-message">Message:</label>
-                    <textarea id="platform-update-message" rows="4" required></textarea>
-                </div>
-                <button type="submit" class="btn">Post Platform Update</button>
-            </form>
-            <p id="platform-update-status" style="margin-top: 1em;"></p>
-        </div>
-
-        <div>
-            <h2>Academic Term Management</h2>
-            <form id="create-term-form">
-                <div>
-                    <label for="term-name">Term Name:</label>
-                    <input type="text" id="term-name" placeholder="e.g., Fall 2024" required>
-                </div>
-                <div>
-                    <label for="term-year">Year:</label>
-                    <input type="number" id="term-year" placeholder="e.g., 2024" min="2000" max="2100" required>
-                </div>
-                <div>
-                    <label for="term-type">Type:</label>
-                    <select id="term-type" required>
-                        <option value="">-- Select Type --</option>
-                        <option value="Fall">Fall</option>
-                        <option value="Spring">Spring</option>
-                        <option value="Summer">Summer</option>
-                        <option value="Winter">Winter</option>
-                        <option value="FullYear">Full Year</option>
-                        <option value="Other">Other</option>
+            <h3>User Management</h3>
+            <div>
+                <div id="admin-user-list-container">
+                    <label for="admin-user-select">Select User:</label>
+                    <select id="admin-user-select" style="margin-bottom: 1em; padding: 8px; min-width: 300px;">
+                        <option value="">Loading users...</option>
                     </select>
                 </div>
-                <div>
-                    <label for="term-start-date">Start Date:</label>
-                    <input type="date" id="term-start-date" required>
-                </div>
-                <div>
-                    <label for="term-end-date">End Date:</label>
-                    <input type="date" id="term-end-date" required>
-                </div>
-                <button type="submit" class="btn">Create Academic Term</button>
-            </form>
-            <p id="term-create-status" style="margin-top: 1em;"></p>
 
-            <h3>Existing Academic Terms</h3>
-            <ul id="existing-terms-list" style="list-style-type: none; padding-left: 0;">
-                <li>Loading terms...</li>
-            </ul>
+                <div id="admin-selected-user-details" class="hidden">
+                    <h3 id="admin-selected-user-name"></h3>
+
+                    <h4>Fees Management</h4>
+                    <p>Current Fees Balance: <strong id="admin-selected-user-fees">N/A</strong></p>
+                    <div>
+                        <label for="admin-new-fees-amount">Set New Amount:</label>
+                        <input type="number" id="admin-new-fees-amount" placeholder="e.g., 27500" step="any">
+                    </div>
+                    <div>
+                        <label for="admin-new-fees-currency">Currency:</label>
+                        <input type="text" id="admin-new-fees-currency" value="MWK">
+                    </div>
+                    <button id="admin-update-fees-btn" class="btn">Update Fees</button>
+                    <p id="admin-update-fees-message" style="margin-top: 0.5em;"></p>
+
+                    <h4>Enrollment Approvals</h4>
+                    <div id="admin-pending-enrollments">
+                        <p>Select a user to see pending enrollments.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h3>Post Platform Update/Announcement</h3>
+            <div>
+                <form id="platform-update-form">
+                    <div>
+                        <label for="platform-update-message">Message:</label>
+                        <textarea id="platform-update-message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Post Platform Update</button>
+                </form>
+                <p id="platform-update-status" style="margin-top: 1em;"></p>
+            </div>
+        </div>
+
+        <div>
+            <h3>Academic Term Management</h3>
+            <div>
+                <form id="create-term-form">
+                    <div>
+                        <label for="term-name">Term Name:</label>
+                        <input type="text" id="term-name" placeholder="e.g., Fall 2024" required>
+                    </div>
+                    <div>
+                        <label for="term-year">Year:</label>
+                        <input type="number" id="term-year" placeholder="e.g., 2024" min="2000" max="2100" required>
+                    </div>
+                    <div>
+                        <label for="term-type">Type:</label>
+                        <select id="term-type" required>
+                            <option value="">-- Select Type --</option>
+                            <option value="Fall">Fall</option>
+                            <option value="Spring">Spring</option>
+                            <option value="Summer">Summer</option>
+                            <option value="Winter">Winter</option>
+                            <option value="FullYear">Full Year</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="term-start-date">Start Date:</label>
+                        <input type="date" id="term-start-date" required>
+                    </div>
+                    <div>
+                        <label for="term-end-date">End Date:</label>
+                        <input type="date" id="term-end-date" required>
+                    </div>
+                    <button type="submit" class="btn">Create Academic Term</button>
+                </form>
+                <p id="term-create-status" style="margin-top: 1em;"></p>
+
+                <h3>Existing Academic Terms</h3>
+                <ul id="existing-terms-list" style="list-style-type: none; padding-left: 0;">
+                    <li>Loading terms...</li>
+                </ul>
+            </div>
         </div>
     </main>
 
     <footer>
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <h4>Contact Us</h4>
-                    <p>Royal African University, Lilongwe, Malawi</p>
-                    <p>Email: <a href="mailto:excellenceassurred3@gmail.com">excellenceassurred3@gmail.com</a></p>
-                    <p>Phone: <a href="tel:0996982449">0996982449/0882884677</a></p>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo">University Portal</span>
+                    <p>Inspired by MIT OpenCourseWare</p>
                 </div>
-                <div class="footer-column">
-                    <h4>Quick Links</h4>
+                <div class="footer-links">
+                    <h4>Resources</h4>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#all-courses">Courses</a></li>
-                        <li><a href="dashboard.html">Dashboard</a></li>
                         <li><a href="#">Academic Calendar</a></li>
+                        <li><a href="#">Library</a></li>
+                        <li><a href="#">Student Services</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
-                    <h4>Accreditation</h4>
-                    <p>Accredited by the National Council for Higher Education (NCHE)</p>
-                    <img src="https://res.cloudinary.com/djuhngvo7/image/upload/v1752329058/royal_african_college_transparent_1_v5gdmr.png" alt="NCHE Logo" style="width: 100px;"/>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="mailto:excellenceassurred3@gmail.com">Email Us</a></li>
+                        <li><a href="https://wa.me/265996982449" target="_blank">WhatsApp Us</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Royal African University. All rights reserved.</p>
-            </div>
+            <p class="copyright">&copy; 2024 University Portal. All rights reserved.</p>
         </div>
     </footer>
 
     <script type="module" src="firebase-config.js"></script>
     <script type="module" src="app.js"></script>
+    <script src="menu.js"></script>
 </body>
 </html>

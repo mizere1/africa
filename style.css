@@ -425,98 +425,120 @@ header#auth-section.hidden {
 
 
 /* Footer */
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-main {
-    flex-grow: 1;
-}
-
 footer {
     background-color: var(--primary-navy-blue);
     color: var(--text-light);
     padding: 3em 0;
-    margin-top: auto;
-    min-height: 15vh;
+    margin-top: 3em;
 }
 
-.footer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 30px;
 }
 
-.footer-column h4 {
-    font-size: 1.25rem;
-    font-weight: 700;
+.footer-logo {
+    flex: 2;
+    min-width: 250px;
+}
+
+.footer-logo .logo {
+    font-size: 1.8em;
+    font-weight: 700; /* Merriweather bold */
+    font-family: 'Merriweather', serif;
     color: var(--text-light);
-    margin-bottom: 1rem;
+}
+.footer-logo p {
+    font-size: 0.9em; /* Lato */
+    color: rgba(255,255,255,0.8);
+    margin-top: 0.5em;
 }
 
-.footer-column p, .footer-column a {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.8);
+.footer-links {
+    flex: 1;
+    min-width: 150px;
 }
 
-.footer-column a:hover {
-    color: var(--accent-gold);
+.footer-links h4 {
+    color: var(--text-light); /* Merriweather */
+    margin-bottom: 1em;
+    font-size: 1.2em;
+    font-weight: 700;
 }
 
-.footer-column ul {
+.footer-links ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
-.footer-column ul li {
-    margin-bottom: 0.5rem;
+.footer-links li {
+    margin-bottom: 0.7em;
 }
 
-.footer-bottom {
+.footer-links a {
+    color: rgba(255,255,255,0.8); /* Lato */
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--accent-gold);
+    text-decoration: none;
+}
+
+.copyright {
     text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    padding-top: 1.5rem;
-    margin-top: 2rem;
-}
-
-.footer-bottom p {
-    font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.7);
+    padding-top: 25px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.7); /* Lato */
+    font-size: 0.9em;
+    margin-top: 25px;
 }
 
 /* Responsive Design */
+.hamburger-menu {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.hamburger-menu .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: var(--text-light);
+    transition: all 0.3s ease-in-out;
+}
+
 @media (max-width: 768px) {
-    .container {
-        width: 95%;
-    }
-
-    nav .container {
-        flex-direction: column;
-        align-items: center; /* Center nav items */
-    }
-    nav .logo {
-        margin-bottom: 10px;
-    }
-
-    nav ul {
-        margin-top: 10px;
-        flex-direction: column;
-        width: 100%;
-    }
-
-    nav ul li {
-        margin-left: 0;
-        margin-bottom: 8px;
-        width: 100%;
-        text-align: center;
-    }
-    nav ul li a {
+    .hamburger-menu {
         display: block;
-        padding: 10px 0;
+    }
+
+    .nav-links {
+        display: none !important;
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--primary-navy-blue);
+        position: absolute;
+        top: 60px;
+        left: 0;
+        padding: 1em 0;
+    }
+
+    .nav-links.active {
+        display: flex !important;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+        text-align: center;
     }
 
     .course-list {
@@ -531,16 +553,20 @@ footer {
         padding: 1.5em;
         max-width: 100%;
     }
-
-    .footer-grid {
-        grid-template-columns: 1fr;
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
         text-align: center;
     }
-
-    .footer-column {
-        margin-bottom: 2rem;
+    .footer-logo, .footer-links {
+        flex: none;
+        width: 100%;
+        margin-bottom: 25px;
     }
-
+    .footer-links ul {
+        display: inline-block;
+        text-align: center;
+    }
     #profile-page .page-content, #dashboard-page .page-content, #admin-page .page-content, #course-detail-page .page-content {
         padding: 1.5em;
     }
@@ -602,7 +628,6 @@ footer {
     color: var(--accent-gold);
     margin: 0;
 }
-
 
 /* Admin Page Specifics */
 /* Admin Page Accordion Styles */

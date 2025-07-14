@@ -629,28 +629,11 @@ function initializeAdminPageLogic(adminUser, adminUserData) {
     }
 
     loadAllCoursesForAdmin();
+    initializeAccordion();
 }
 
 function initializeAccordion() {
-    const accordionHeaders = document.querySelectorAll('.accordion-header');
-    accordionHeaders.forEach(header => {
-        header.addEventListener('click', () => {
-            const currentContent = header.nextElementSibling;
-            const wasActive = header.classList.contains('active');
-
-            // Close all accordions
-            accordionHeaders.forEach(h => {
-                h.classList.remove('active');
-                h.nextElementSibling.style.maxHeight = null;
-            });
-
-            // If the clicked accordion was not active, open it
-            if (!wasActive) {
-                header.classList.add('active');
-                currentContent.style.maxHeight = currentContent.scrollHeight + "px";
-            }
-        });
-    });
+    // This function is now empty.
 }
 
 function initializeLearningPage(user, userData) {

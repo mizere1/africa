@@ -11,7 +11,12 @@
     <nav>
         <div class="container">
             <a href="index.html" class="logo"><img src="https://res.cloudinary.com/djuhngvo7/image/upload/v1752329058/royal_african_college_transparent_1_v5gdmr.png" alt="Royal African College Logo" style="height: 40px;"></a>
-            <ul>
+            <button class="hamburger-menu" id="hamburger-menu" aria-label="Open Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="index.html#all-courses">Courses</a></li>
                 <li id="student-chat-nav-link" class="hidden"><a href="chat.html">Chat</a></li>
@@ -103,37 +108,41 @@
 
     <footer>
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <h4>Contact Us</h4>
-                    <p>Royal African University, Lilongwe, Malawi</p>
-                    <p>Email: <a href="mailto:excellenceassurred3@gmail.com">excellenceassurred3@gmail.com</a></p>
-                    <p>Phone: <a href="tel:0996982449">0996982449/0882884677</a></p>
+            <p>&copy; 2024 University Portal. Inspired by MIT OpenCourseWare.</p>
+        </div>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo">University Portal</span>
+                    <p>Inspired by MIT OpenCourseWare</p>
                 </div>
-                <div class="footer-column">
-                    <h4>Quick Links</h4>
+                <div class="footer-links">
+                    <h4>Resources</h4>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#all-courses">Courses</a></li>
-                        <li><a href="dashboard.html">Dashboard</a></li>
                         <li><a href="#">Academic Calendar</a></li>
+                        <li><a href="#">Library</a></li>
+                        <li><a href="#">Student Services</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
-                    <h4>Accreditation</h4>
-                    <p>Accredited by the National Council for Higher Education (NCHE)</p>
-                    <img src="https://res.cloudinary.com/djuhngvo7/image/upload/v1752329058/royal_african_college_transparent_1_v5gdmr.png" alt="NCHE Logo" style="width: 100px;"/>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="mailto:excellenceassurred3@gmail.com">Email Us</a></li>
+                        <li><a href="https://wa.me/265996982449" target="_blank">WhatsApp Us</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Royal African University. All rights reserved.</p>
-            </div>
+            <p class="copyright">&copy; 2024 University Portal. All rights reserved.</p>
         </div>
     </footer>
 
     <!-- Firebase v11+ uses ES Modules -->
     <script type="module" src="firebase-config.js"></script>
     <script type="module" src="app.js"></script>
+    <script src="menu.js"></script>
     <!-- sample-data.js will also need to be module if it imports from firebase-config.js -->
     <!-- <script type="module" src="sample-data.js"></script> -->
 </body>
