@@ -629,7 +629,6 @@ function initializeAdminPageLogic(adminUser, adminUserData) {
     }
 
     loadAllCoursesForAdmin();
-    initializeAccordion();
 }
 
 function initializeAccordion() {

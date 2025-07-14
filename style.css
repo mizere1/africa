@@ -425,77 +425,67 @@ header#auth-section.hidden {
 
 
 /* Footer */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex-grow: 1;
+}
+
 footer {
     background-color: var(--primary-navy-blue);
     color: var(--text-light);
     padding: 3em 0;
-    margin-top: 3em;
+    margin-top: auto;
+    min-height: 15vh;
 }
 
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 40px;
-    margin-bottom: 30px;
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
 }
 
-.footer-logo {
-    flex: 2;
-    min-width: 250px;
-}
-
-.footer-logo .logo {
-    font-size: 1.8em;
-    font-weight: 700; /* Merriweather bold */
-    font-family: 'Merriweather', serif;
-    color: var(--text-light);
-}
-.footer-logo p {
-    font-size: 0.9em; /* Lato */
-    color: rgba(255,255,255,0.8);
-    margin-top: 0.5em;
-}
-
-.footer-links {
-    flex: 1;
-    min-width: 150px;
-}
-
-.footer-links h4 {
-    color: var(--text-light); /* Merriweather */
-    margin-bottom: 1em;
-    font-size: 1.2em;
+.footer-column h4 {
+    font-size: 1.25rem;
     font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 1rem;
 }
 
-.footer-links ul {
+.footer-column p, .footer-column a {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-column a:hover {
+    color: var(--accent-gold);
+}
+
+.footer-column ul {
     list-style: none;
     padding: 0;
-    margin: 0;
 }
 
-.footer-links li {
-    margin-bottom: 0.7em;
+.footer-column ul li {
+    margin-bottom: 0.5rem;
 }
 
-.footer-links a {
-    color: rgba(255,255,255,0.8); /* Lato */
-    transition: color 0.3s;
-}
-
-.footer-links a:hover {
-    color: var(--accent-gold);
-    text-decoration: none;
-}
-
-.copyright {
+.footer-bottom {
     text-align: center;
-    padding-top: 25px;
-    border-top: 1px solid rgba(255,255,255,0.2);
-    color: rgba(255,255,255,0.7); /* Lato */
-    font-size: 0.9em;
-    margin-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+}
+
+.footer-bottom p {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 /* Responsive Design */
@@ -541,20 +531,16 @@ footer {
         padding: 1.5em;
         max-width: 100%;
     }
-    .footer-content {
-        flex-direction: column;
-        align-items: center;
+
+    .footer-grid {
+        grid-template-columns: 1fr;
         text-align: center;
     }
-    .footer-logo, .footer-links {
-        flex: none;
-        width: 100%;
-        margin-bottom: 25px;
+
+    .footer-column {
+        margin-bottom: 2rem;
     }
-    .footer-links ul {
-        display: inline-block;
-        text-align: center;
-    }
+
     #profile-page .page-content, #dashboard-page .page-content, #admin-page .page-content, #course-detail-page .page-content {
         padding: 1.5em;
     }
@@ -617,53 +603,6 @@ footer {
     margin: 0;
 }
 
-/* Admin Page Accordion Styles */
-.admin-accordion-section {
-    background-color: var(--text-light);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    margin-bottom: 1em;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    overflow: hidden; /* Ensures content doesn't spill out during transition */
-}
-.accordion-header {
-    cursor: pointer;
-    padding: 1em 1.5em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: background-color 0.2s ease;
-}
-.accordion-header:hover {
-    background-color: var(--secondary-cool-gray);
-}
-.accordion-header h2 {
-    margin: 0;
-    font-size: 1.5em;
-}
-.accordion-header::after {
-    content: '▼'; /* Down arrow */
-    font-size: 0.8em;
-    transition: transform 0.3s ease;
-}
-.accordion-header.active::after {
-    transform: rotate(-180deg); /* Up arrow */
-}
-.accordion-content {
-    padding: 0 1.5em 1.5em 1.5em;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out, padding 0.4s ease;
-}
-.accordion-content.active {
-    max-height: 5000px; /* Large value to allow for any content height */
-    overflow: visible;
-}
-.accordion-content > div:first-child,
-.accordion-content > form:first-child {
-    padding-top: 1.5em;
-    border-top: 1px solid var(--border-color);
-}
 
 /* Admin Page Specifics */
 /* Admin Page Accordion Styles */
