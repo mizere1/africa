@@ -10,7 +10,6 @@ import { getDatabase } from "https://www.gstatic.com/firebasejs/11.10.0/firebase
 const firebaseConfig = {
   apiKey: "AIzaSyAYvFFHRwsS6LQvfpU-TBQiez1L_E7HcKQ",
   authDomain: "cheza-e769a.firebaseapp.com",
-  databaseURL: "https://cheza-e769a-default-rtdb.firebaseio.com",
   projectId: "cheza-e769a",
   storageBucket: "cheza-e769a.appspot.com",
   messagingSenderId: "462385709527",
