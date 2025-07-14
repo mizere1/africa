@@ -544,6 +544,7 @@ footer {
     display: none;
     font-size: 30px;
     cursor: pointer;
+    color: var(--accent-gold);
 }
 
 /* Responsive Design */
