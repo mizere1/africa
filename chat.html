@@ -3,422 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Chat - University Portal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&display=swap');
-
-:root {
-    /* New University Palette */
-    --primary-navy-blue: #00274D;
-    --accent-gold: #FFB81C;
-    --secondary-cool-gray: #F5F5F5;
-    --contrast-dark-green: #14532D; /* For accents or specific highlights */
-
-    /* Text Colors */
-    --text-dark: #333333; /* Default dark text on light backgrounds */
-    --text-light: #FFFFFF; /* Default light text on dark backgrounds */
-    --text-medium-gray: #555555; /* For less prominent text */
-
-    /* Supporting Colors (can be derived or specified) */
-    --border-color: #DDDDDD; /* Light border for cards/dividers on light backgrounds */
-    --link-hover-color: #EAA800; /* Darker gold for hover */
-}
-
-/* General Styles */
-body {
-    font-family: 'Lato', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: var(--secondary-cool-gray);
-    color: var(--text-dark);
-    line-height: 1.7;
-}
-
-.container {
-    width: 95%;
-    margin: 0 auto;
-    max-width: 1300px;
-    padding: 0 15px;
-}
-
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Merriweather', serif;
-    font-weight: 700;
-    color: var(--primary-navy-blue);
-    margin-top: 0;
-}
-
-h1 { font-size: 2em; }
-h2 { font-size: 1.7em; }
-h3 { font-size: 1.4em; }
-
-p {
-    margin-bottom: 1.2em;
-    color: var(--text-medium-gray);
-}
-
-a {
-    color: var(--primary-navy-blue);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: var(--accent-gold);
-    text-decoration: underline;
-}
-
-/* Header/Navigation */
-nav {
-    background-color: var(--primary-navy-blue);
-    color: var(--text-light);
-    padding: 1em 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    width: 100%;
-}
-
-nav .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-nav .logo {
-    color: var(--text-light);
-    font-weight: 700;
-    font-size: 1.4em;
-    font-family: 'Merriweather', serif;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    background-color: var(--primary-navy-blue);
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 999;
-}
-
-nav ul.active {
-    display: flex;
-}
-
-nav ul li {
-    margin: 0;
-    width: 100%;
-    text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-nav ul li a {
-    color: var(--text-light);
-    font-weight: 500;
-    font-family: 'Lato', sans-serif;
-    padding: 1em;
-    display: block;
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-    text-transform: uppercase;
-    font-size: 0.9em;
-}
-
-nav ul li a:hover,
-nav ul li a.active {
-    background-color: var(--accent-gold);
-    color: var(--primary-navy-blue);
-    text-decoration: none;
-}
-
-.hamburger {
-    display: block;
-    cursor: pointer;
-    background: transparent;
-    border: none;
-    padding: 0;
-}
-
-.hamburger span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px 0;
-    background-color: var(--text-light);
-    transition: all 0.3s ease-in-out;
-}
-
-
-/* Auth Section */
-header#auth-section {
-    background-color: var(--text-light);
-    padding: 2.5em 0;
-    text-align: center;
-    border-bottom: 1px solid var(--border-color);
-}
-header#auth-section.hidden {
-    display: none;
-}
-
-.auth-form {
-    margin-bottom: 2em;
-    padding: 1.5em;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    background-color: var(--text-light);
-    text-align: left;
-    max-width: 100%;
-    width: 100%;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-}
-.auth-form h3 {
-    text-align: center;
-}
-.auth-form input, .auth-form select, .auth-form textarea {
-    width: calc(100% - 24px);
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    font-size: 1em;
-}
-.auth-form button {
-    width: 100%;
-    padding: 12px;
-    background-color: var(--primary-navy-blue);
-    color: var(--text-light);
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 1em;
-    text-transform: uppercase;
-    font-weight: 700;
-    transition: background-color 0.3s ease;
-}
-.auth-form button:hover {
-    background-color: var(--accent-gold);
-    color: var(--primary-navy-blue);
-}
-
-/* Course Cards */
-.course-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 25px;
-}
-.course-card {
-    background-color: var(--text-light);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.07);
-}
-
-/* Buttons */
-.btn {
-    display: inline-block;
-    background-color: var(--accent-gold);
-    color: var(--primary-navy-blue);
-    padding: 12px 28px;
-    border: 1px solid transparent;
-    border-radius: 25px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 1em;
-    transition: all 0.3s ease;
-    font-weight: 700;
-    font-family: 'Lato', sans-serif;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-.btn:hover {
-    background-color: var(--primary-navy-blue);
-    color: var(--text-light);
-}
-
-/* Footer */
-footer {
-    background-color: var(--primary-navy-blue);
-    color: var(--text-light);
-    padding: 3em 0;
-    margin-top: 3em;
-}
-.footer-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-.footer-logo, .footer-links {
-    margin-bottom: 25px;
-}
-.footer-links ul {
-    list-style: none;
-    padding: 0;
-}
-.copyright {
-    text-align: center;
-    padding-top: 25px;
-    border-top: 1px solid rgba(255,255,255,0.2);
-    margin-top: 25px;
-}
-
-/* Tablet styles */
-@media (min-width: 768px) {
-    .container {
-        width: 90%;
-    }
-    h1 { font-size: 2.2em; }
-    h2 { font-size: 1.9em; }
-    h3 { font-size: 1.6em; }
-    .hamburger {
-        display: none;
-    }
-    nav ul {
-        display: flex;
-        flex-direction: row;
-        width: auto;
-        position: static;
-    }
-    nav ul li {
-        margin-left: 20px;
-        width: auto;
-        border-top: none;
-    }
-    nav ul li a {
-        padding: 0.6em 1em;
-    }
-    .course-list {
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    }
-    .auth-form {
-        max-width: 400px;
-        display: inline-block;
-    }
-    .footer-content {
-        flex-direction: row;
-        justify-content: space-between;
-        text-align: left;
-    }
-}
-
-/* Desktop styles */
-@media (min-width: 1024px) {
-    h1 { font-size: 2.6em; }
-    h2 { font-size: 2.2em; }
-    h3 { font-size: 1.8em; }
-}
-    </style>
-    <style>
-        .chat-container {
-            max-width: 800px;
-            margin: 2em auto;
-            padding: 2em;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        #chat-messages-area {
-            height: 400px;
-            overflow-y: auto;
-            border: 1px solid #e0e0e0;
-            padding: 15px;
-            margin-bottom: 15px;
-            background-color: #f9f9f9;
-            border-radius: 4px;
-        }
-        .chat-message {
-            padding: 8px 12px;
-            margin-bottom: 8px;
-            border-radius: 4px;
-            line-height: 1.4;
-        }
-        .chat-message strong {
-            color: var(--mit-red);
-        }
-        .chat-message .timestamp {
-            font-size: 0.8em;
-            color: #777;
-            margin-left: 10px;
-        }
-        #chat-input-area {
-            display: flex;
-            gap: 10px;
-        }
-        #chat-message-input {
-            flex-grow: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-family: 'Inter', sans-serif;
-        }
-    </style>
+    <title>Chat - University Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="premium.css">
 </head>
 <body>
-    <nav>
-        <div class="container">
-            <a href="index.html" class="logo">Royal African College</a>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#all-courses">Courses</a></li>
-                <li id="student-chat-nav-link" class="hidden"><a href="chat.html">Chat</a></li>
-                <li id="announcements-nav-link"><a href="dashboard.html#platform-news-section">Announcements</a></li>
-                <li id="admin-nav-link" class="hidden"><a href="admin.html">Admin</a></li>
-                <li><a href="#">Contact</a></li>
-                <li id="profile-nav-link" class="hidden"><a href="profile.html">Profile</a></li> 
-                <li id="auth-status"><a href="#" id="login-logout">Login</a></li>
-            </ul>
+    <header class="header">
+        <div class="logo-container">
+            <img src="https://res.cloudinary.com/djuhngvo7/image/upload/v1752329058/royal_african_college_transparent_1_v5gdmr.png" alt="Royal African College Logo" class="university-logo">
+            <span class="logo-text">Royal African College</span>
         </div>
-    </nav>
+        <nav>
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="index.html#all-courses" class="nav-link">Courses</a>
+            <a href="chat.html" class="nav-link">Chat</a>
+            <a href="dashboard.html#platform-news-section" class="nav-link">Announcements</a>
+            <a href="admin.html" class="nav-link">Admin</a>
+            <a href="#" class="nav-link">Contact</a>
+            <a href="profile.html" class="nav-link">Profile</a>
+            <a href="#" id="login-logout" class="nav-link">Login</a>
+        </nav>
+    </header>
 
-    <main class="container chat-container">
-        <h1>Student Chat</h1>
-        <div id="chat-messages-area">
-            <p>Loading messages...</p>
-        </div>
-        <div id="chat-input-area">
-            <input type="text" id="chat-message-input" placeholder="Type your message...">
-            <button id="send-chat-message-btn" class="btn">Send</button>
-        </div>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <span class="logo">University Portal</span>
-                    <p>Inspired by MIT OpenCourseWare</p>
+    <main>
+        <section class="features">
+            <div class="feature-card">
+                <h1>Student Chat</h1>
+                <div id="chat-messages-area">
+                    <p>Loading messages...</p>
                 </div>
-                <div class="footer-links">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="#">Academic Calendar</a></li>
-                        <li><a href="#">Library</a></li>
-                        <li><a href="#">Student Services</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="mailto:excellenceassurred3@gmail.com">Email Us</a></li>
-                        <li><a href="https://wa.me/265996982449" target="_blank">WhatsApp Us</a></li>
-                        <li><a href="#">Feedback</a></li>
-                    </ul>
+                <div id="chat-input-area">
+                    <input type="text" id="chat-message-input" placeholder="Type your message...">
+                    <button id="send-chat-message-btn" class="cta-button">Send</button>
                 </div>
             </div>
-            <p class="copyright">&copy; 2024 University Portal. All rights reserved.</p>
-        </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 University Portal. All rights reserved.</p>
     </footer>
 
     <script type="module" src="firebase-config.js"></script>
