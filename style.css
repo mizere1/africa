@@ -1,5 +1,11 @@
+/*
+Main stylesheet for the University Portal.
+*/
+
+/* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&display=swap');
 
+/* CSS Variables for color palette */
 :root {
     /* New University Palette */
     --primary-navy-blue: #00274D;
@@ -498,6 +504,48 @@ footer {
     margin-top: 25px;
 }
 
+/* Sidenav for mobile navigation */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1001;
+    top: 0;
+    left: 0;
+    background-color: var(--primary-navy-blue);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Hamburger menu icon */
+.hamburger {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
@@ -505,28 +553,16 @@ footer {
     }
 
     nav .container {
-        flex-direction: column;
-        align-items: center; /* Center nav items */
-    }
-    nav .logo {
-        margin-bottom: 10px;
+        flex-direction: row;
+        justify-content: space-between;
     }
 
-    nav ul {
-        margin-top: 10px;
-        flex-direction: column;
-        width: 100%;
+    .desktop-nav {
+        display: none;
     }
 
-    nav ul li {
-        margin-left: 0;
-        margin-bottom: 8px;
-        width: 100%;
-        text-align: center;
-    }
-    nav ul li a {
+    .hamburger {
         display: block;
-        padding: 10px 0;
     }
 
     .course-list {
@@ -739,6 +775,16 @@ footer {
 #admin-page .accordion-content #existing-terms-list li:last-child,
 #admin-page .accordion-content #admin-pending-enrollments li:last-child {
     border-bottom: none;
+}
+
+.admin-accordion-section.active .accordion-header {
+    background-color: var(--secondary-cool-gray);
+}
+
+.admin-accordion-section.active .accordion-content {
+    padding: 1.5em;
+    max-height: 5000px; /* Large value to allow for any content height */
+    overflow: visible;
 }
 
 

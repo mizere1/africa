@@ -1,11 +1,29 @@
+/**
+ * Opens the side navigation menu.
+ */
 function openNav() {
-    document.getElementById("mySidenav").style.width = "70vw";
-    document.getElementById("main").style.marginLeft = "70vw";
-    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+    document.getElementById("mySidenav").style.width = "250px";
 }
 
+/**
+ * Closes the side navigation menu.
+ */
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("main").style.marginLeft= "0";
-    document.body.style.backgroundColor = "white";
 }
+
+/**
+ * Adds an event listener to the mobile login/logout button to trigger the desktop button.
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    const loginLogoutMobile = document.getElementById('login-logout-mobile');
+    if (loginLogoutMobile) {
+        loginLogoutMobile.addEventListener('click', (e) => {
+            e.preventDefault();
+            const loginLogoutDesktop = document.getElementById('login-logout');
+            if (loginLogoutDesktop) {
+                loginLogoutDesktop.click();
+            }
+        });
+    }
+});

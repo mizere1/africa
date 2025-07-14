@@ -4,32 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Course Management</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        body {
+            font-family: sans-serif;
+            background-color: #fff;
+            color: #000;
+        }
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1em;
+        }
+        h1, h2, h3, h4, h5 {
+            color: #000;
+        }
+        input, textarea, select, button {
+            width: 100%;
+            padding: 0.5em;
+            margin: 0.5em 0;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #FFB81C;
+            color: #000;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="container">
-            <a href="index.html" class="logo"><img src="https://res.cloudinary.com/djuhngvo7/image/upload/v1752329058/royal_african_college_transparent_1_v5gdmr.png" alt="Royal African College Logo" style="height: 40px;"></a>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#all-courses">Courses</a></li>
-                <li id="student-chat-nav-link" class="hidden"><a href="chat.html">Chat</a></li>
-                <li id="announcements-nav-link"><a href="dashboard.html#platform-news-section">Announcements</a></li>
-                <li id="admin-nav-link" class="hidden"><a href="admin.html">Admin</a></li>
-                <li><a href="#">Contact</a></li>
-                <li id="profile-nav-link" class="hidden"><a href="profile.html">Profile</a></li>
-                <li id="auth-status"><a href="#" id="login-logout">Login</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <main id="admin-page" class="container">
+    <main>
         <h1>Admin Dashboard</h1>
 
         <div>
-            <h3>Create New Course</h3>
+            <h2>Create New Course</h2>
             <form id="create-course-form">
                 <div>
                     <label for="course-title">Course Title:</label>
@@ -58,13 +66,13 @@
                         <!-- Terms will be populated by JavaScript -->
                     </select>
                 </div>
-                <button type="submit" class="btn">Create Course</button>
+                <button type="submit">Create Course</button>
             </form>
-            <p id="create-course-message" style="margin-top: 1em;"></p>
+            <p id="create-course-message"></p>
         </div>
 
         <div>
-            <h3>Manage Course Content</h3>
+            <h2>Manage Course Content</h2>
             <div>
                 <div>
                     <label for="admin-course-select">Select Course to Manage:</label>
@@ -75,52 +83,50 @@
                 </div>
 
                 <div id="course-content-editor" class="hidden">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1em;">
-                    <h3 id="editing-course-title" style="margin: 0;"></h3>
-                    <button id="delete-course-btn" class="btn btn-danger">Delete This Course</button>
-                </div>
+                    <h3 id="editing-course-title"></h3>
+                    <button id="delete-course-btn">Delete This Course</button>
                     <div id="course-sections-container">
                         <!-- Sections will be rendered here by JS -->
                     </div>
-                    <div id="add-section-form-container">
+                    <div>
                         <h4>Add New Section</h4>
                         <form id="add-section-form">
                             <input type="text" id="new-section-title" placeholder="Enter new section title (e.g., Semester 1)" required>
-                            <button type="submit" class="btn">Add Section</button>
+                            <button type="submit">Add Section</button>
                         </form>
                     </div>
                 </div>
 
                 <!-- Templates for adding content to sections -->
                 <div id="content-templates" class="hidden">
-                    <div class="add-content-form" id="add-video-form-template">
+                    <div>
                         <h5>Add New Video</h5>
-                        <input type="text" class="content-title-input" placeholder="Video Title" required>
-                        <input type="url" class="content-url-input" placeholder="https://youtube.com/watch?v=..." required>
-                        <button type="button" class="btn btn-sm add-content-btn" data-type="video">Add Video</button>
+                        <input type="text" placeholder="Video Title" required>
+                        <input type="url" placeholder="https://youtube.com/watch?v=..." required>
+                        <button type="button" data-type="video">Add Video</button>
                     </div>
-                    <div class="add-content-form" id="add-pdf-form-template">
+                    <div>
                         <h5>Add New PDF</h5>
-                        <input type="text" class="content-title-input" placeholder="PDF Document Title" required>
-                        <input type="url" class="content-url-input" placeholder="https://example.com/document.pdf" required>
-                        <button type="button" class="btn btn-sm add-content-btn" data-type="pdf">Add PDF</button>
+                        <input type="text" placeholder="PDF Document Title" required>
+                        <input type="url" placeholder="https://example.com/document.pdf" required>
+                        <button type="button" data-type="pdf">Add PDF</button>
                     </div>
-                    <div class="add-content-form" id="add-module-form-template">
+                    <div>
                         <h5>Add New Module</h5>
-                        <input type="text" class="content-title-input" placeholder="Module Title" required>
-                        <textarea class="content-text-input" placeholder="Module content..."></textarea>
-                        <button type="button" class="btn btn-sm add-content-btn" data-type="module">Add Module</button>
+                        <input type="text" placeholder="Module Title" required>
+                        <textarea placeholder="Module content..."></textarea>
+                        <button type="button" data-type="module">Add Module</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <div>
-            <h3>User Management</h3>
+            <h2>User Management</h2>
             <div>
-                <div id="admin-user-list-container">
+                <div>
                     <label for="admin-user-select">Select User:</label>
-                    <select id="admin-user-select" style="margin-bottom: 1em; padding: 8px; min-width: 300px;">
+                    <select id="admin-user-select">
                         <option value="">Loading users...</option>
                     </select>
                 </div>
@@ -138,8 +144,8 @@
                         <label for="admin-new-fees-currency">Currency:</label>
                         <input type="text" id="admin-new-fees-currency" value="MWK">
                     </div>
-                    <button id="admin-update-fees-btn" class="btn">Update Fees</button>
-                    <p id="admin-update-fees-message" style="margin-top: 0.5em;"></p>
+                    <button id="admin-update-fees-btn">Update Fees</button>
+                    <p id="admin-update-fees-message"></p>
 
                     <h4>Enrollment Approvals</h4>
                     <div id="admin-pending-enrollments">
@@ -150,21 +156,21 @@
         </div>
 
         <div>
-            <h3>Post Platform Update/Announcement</h3>
+            <h2>Post Platform Update/Announcement</h2>
             <div>
                 <form id="platform-update-form">
                     <div>
                         <label for="platform-update-message">Message:</label>
                         <textarea id="platform-update-message" rows="4" required></textarea>
                     </div>
-                    <button type="submit" class="btn">Post Platform Update</button>
+                    <button type="submit">Post Platform Update</button>
                 </form>
-                <p id="platform-update-status" style="margin-top: 1em;"></p>
+                <p id="platform-update-status"></p>
             </div>
         </div>
 
         <div>
-            <h3>Academic Term Management</h3>
+            <h2>Academic Term Management</h2>
             <div>
                 <form id="create-term-form">
                     <div>
@@ -195,47 +201,17 @@
                         <label for="term-end-date">End Date:</label>
                         <input type="date" id="term-end-date" required>
                     </div>
-                    <button type="submit" class="btn">Create Academic Term</button>
+                    <button type="submit">Create Academic Term</button>
                 </form>
-                <p id="term-create-status" style="margin-top: 1em;"></p>
+                <p id="term-create-status"></p>
 
                 <h3>Existing Academic Terms</h3>
-                <ul id="existing-terms-list" style="list-style-type: none; padding-left: 0;">
+                <ul id="existing-terms-list">
                     <li>Loading terms...</li>
                 </ul>
             </div>
         </div>
     </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <span class="logo">University Portal</span>
-                    <p>Inspired by MIT OpenCourseWare</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="#">Academic Calendar</a></li>
-                        <li><a href="#">Library</a></li>
-                        <li><a href="#">Student Services</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="mailto:excellenceassurred3@gmail.com">Email Us</a></li>
-                        <li><a href="https://wa.me/265996982449" target="_blank">WhatsApp Us</a></li>
-                        <li><a href="#">Feedback</a></li>
-                    </ul>
-                </div>
-            </div>
-            <p class="copyright">&copy; 2024 University Portal. All rights reserved.</p>
-        </div>
-    </footer>
-
     <script type="module" src="firebase-config.js"></script>
     <script type="module" src="app.js"></script>
 </body>

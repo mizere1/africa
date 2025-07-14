@@ -1,7 +1,10 @@
+// Main application logic for the University Portal
+// Handles Firebase authentication, database interactions, and dynamic content loading.
+
 // Import Firebase services from firebase-config.js
 import { auth, db } from './firebase-config.js';
 
-// Import Firebase functions
+// Import Firebase functions for authentication, database, and storage
 import { 
     createUserWithEmailAndPassword, 
     signInWithEmailAndPassword, 
@@ -28,7 +31,7 @@ import {
     getDownloadURL 
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-storage.js";
 
-// Import functions to populate sample data
+// Import functions to populate sample data if the database is empty
 import { addSampleCourses, addSampleAnnouncements, addSampleAcademicTerms } from './sample-data.js';
 
 // --- Global DOM Element variables ---
@@ -37,6 +40,10 @@ let mainContentPages = {};
 let storage; 
 
 // --- CORE HELPER & AUTH FUNCTIONS ---
+
+/**
+ * Handles user logout.
+ */
 function handleLogout() { 
     console.log("handleLogout: CALLED");
     signOut(auth).then(() => {
@@ -47,6 +54,12 @@ function handleLogout() {
     });
 }
 
+/**
+ * Uploads a file to Firebase Storage.
+ * @param {File} file The file to upload.
+ * @param {string} path The path to upload the file to.
+ * @returns {Promise<string|null>} A promise that resolves with the download URL of the uploaded file, or null if the upload fails.
+ */
 async function uploadFileToStorage(file, path) {
     if (!file || !storage) { 
         console.warn("uploadFileToStorage: File or storage service not available.", {filePresent: !!file, storageExists: !!storage});
@@ -64,6 +77,10 @@ async function uploadFileToStorage(file, path) {
     }
 }
 
+/**
+ * Shows the authentication section (login/signup forms).
+ * @param {Event} e The event object.
+ */
 function showAuthSection(e){ 
     console.log("showAuthSection: CALLED");
     if(e) e.preventDefault();
@@ -75,6 +92,9 @@ function showAuthSection(e){
     }
 }
 
+/**
+ * Clears the user data from the profile page.
+ */
 function clearProfilePageData() {
     console.log("clearProfilePageData: CALLED");
     const profileFieldsIds = [
@@ -104,6 +124,11 @@ function clearProfilePageData() {
 }
 
 // --- UI Update Functions (General) ---
+
+/**
+ * Updates the UI for a logged-in user.
+ * @param {User} user The user object from Firebase Auth.
+ */
 function updateUIForLoggedInUser(user) { 
     console.log("--- updateUIForLoggedInUser: ENTERED for user:", user?.uid); 
     if (loginLogoutNav) { 
@@ -138,6 +163,9 @@ function updateUIForLoggedInUser(user) {
     if(profileNavLink) profileNavLink.classList.remove('hidden');
 }
     
+/**
+ * Updates the UI for a logged-out user.
+ */
 function updateUIForLoggedOutUser() { 
     console.log("updateUIForLoggedOutUser: CALLED"); 
     if (loginLogoutNav) { 
@@ -183,6 +211,12 @@ function updateUIForLoggedOutUser() {
 }
 
 // --- Page Specific Initializers ---
+
+/**
+ * Initializes the logic for the admin page.
+ * @param {User} adminUser The admin user object from Firebase Auth.
+ * @param {object} adminUserData The admin user data from the database.
+ */
 function initializeAdminPageLogic(adminUser, adminUserData) {
     console.log("Initializing Admin Page Logic for user:", adminUser.uid);
     const createCourseForm = document.getElementById('create-course-form');
@@ -632,10 +666,18 @@ function initializeAdminPageLogic(adminUser, adminUserData) {
     initializeAccordion();
 }
 
+/**
+ * Initializes the accordion behavior for the admin page.
+ */
 function initializeAccordion() {
     // This function is now empty.
 }
 
+/**
+ * Initializes the learning page for a specific course.
+ * @param {User} user The user object from Firebase Auth.
+ * @param {object} userData The user data from the database.
+ */
 function initializeLearningPage(user, userData) {
     console.log("Initializing Learning Page for user:", user.uid);
     const courseId = new URLSearchParams(window.location.search).get('id');
@@ -734,12 +776,21 @@ function initializeLearningPage(user, userData) {
     });
 }
 
+/**
+ * Parses a YouTube URL to get the video ID.
+ * @param {string} url The YouTube URL.
+ * @returns {string|null} The video ID, or null if it can't be parsed.
+ */
 function parseYoutubeUrl(url) {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     const match = url.match(regExp);
     return (match && match[2].length === 11) ? match[2] : null;
 }
 
+/**
+ * Initializes the chat page.
+ * @param {User} currentUser The current user object from Firebase Auth.
+ */
 function initializeChatPage(currentUser) {
     console.log("Attempting to initialize Chat Page for user:", currentUser.uid);
     const messagesArea = document.getElementById('chat-messages-area');
@@ -780,6 +831,11 @@ function initializeChatPage(currentUser) {
 }
 
 // --- Main User Data Loading and Page Routing Logic ---
+
+/**
+ * Loads user data from the database and updates the UI accordingly.
+ * @param {User} user The user object from Firebase Auth.
+ */
 function loadUserData(user) { 
     console.log("--- loadUserData: CALLED for UID: " + user.uid + " (Full Functionality Enabled) ---"); 
     console.log("loadUserData: User auth object passed:", JSON.stringify(user, null, 2)); 
@@ -919,6 +975,11 @@ function loadUserData(user) {
 }
 
 // --- Other Functions (Academic Progress, Course Loaders, etc.) ---
+
+/**
+ * Loads the academic progress for a user and displays it on the dashboard.
+ * @param {string} userId The ID of the user.
+ */
 async function loadAcademicProgress(userId) { 
     const coursesInProgressEl = document.getElementById('courses-in-progress');
     const assignmentsDueEl = document.getElementById('assignments-due');
@@ -948,7 +1009,11 @@ async function loadAcademicProgress(userId) {
         coursesInProgressEl.textContent = 'N/A'; assignmentsDueEl.textContent = 'N/A'; upcomingExamsEl.textContent = 'N/A';
     }
 }
-// Definition of loadAllCourses
+
+/**
+ * Loads all available courses and displays them on the home page.
+ * @param {string} currentUserId The ID of the current user.
+ */
 async function loadAllCourses(currentUserId) { 
     const coursesDbRef = ref(db, 'courses');
     const coursesContainer = document.getElementById('courses-container');
@@ -1000,6 +1065,13 @@ async function loadAllCourses(currentUserId) {
         if(coursesContainer) coursesContainer.innerHTML = '<p>Error loading courses. Please try again later.</p>';
     }
 }
+
+/**
+ * Enrolls a user in a course.
+ * @param {string} userId The ID of the user.
+ * @param {string} courseId The ID of the course.
+ * @param {HTMLButtonElement} button The button element that was clicked.
+ */
 async function enrollInCourse(userId, courseId, button) { 
     const userCoursesDbRef = ref(db, 'users/' + userId + '/enrolledCourses');
     try {
@@ -1031,6 +1103,13 @@ async function enrollInCourse(userId, courseId, button) {
         }
     } catch (e) { console.error("Error enrolling:", e); alert(`Error enrolling: ${e.message}`); }
 }
+
+/**
+ * Loads the courses a user is enrolled in and displays them on the dashboard.
+ * @param {string} userId The ID of the user.
+ * @param {Array} enrolledCoursesData An array of the user's enrolled courses.
+ * @param {object} userProgress The user's progress data.
+ */
 async function loadEnrolledCourses(userId, enrolledCoursesData, userProgress) { 
     const enrolledCoursesList = document.getElementById('enrolled-courses-list');
     if (!enrolledCoursesList) return;
@@ -1078,6 +1157,11 @@ async function loadEnrolledCourses(userId, enrolledCoursesData, userProgress) {
         } catch (error) { console.error(`Error loading enrolled course ${courseId}:`, error); }
     }
 }
+
+/**
+ * Loads announcements for the courses a user is enrolled in.
+ * @param {Array} enrolledCoursesData An array of the user's enrolled courses.
+ */
 function loadAnnouncements(enrolledCoursesData) { 
     const announcementsList = document.getElementById('announcements-list');
     if (!announcementsList) return;
@@ -1105,6 +1189,12 @@ function loadAnnouncements(enrolledCoursesData) {
         if (!found) announcementsList.innerHTML = '<li>No new announcements for your courses.</li>';
     }, (err) => { console.error("Error loading announcements:", err); announcementsList.innerHTML = '<li>Error loading.</li>';});
 }
+
+/**
+ * Loads the details for a specific course and checks if the user has access.
+ * @param {User} currentUser The current user object from Firebase Auth.
+ * @param {object} currentUserData The current user's data from the database.
+ */
 async function loadCourseDetailsWithAccessCheck(currentUser, currentUserData) { 
     console.log("loadCourseDetailsWithAccessCheck: CALLED");
     const courseId = new URLSearchParams(window.location.search).get('id');
@@ -1175,6 +1265,12 @@ async function loadCourseDetailsWithAccessCheck(currentUser, currentUserData) {
         } else { courseDetailContent.innerHTML = '<p>Course details not found.</p>'; }
     } catch (error) { console.error("Error loading course details:", error); courseDetailContent.innerHTML = '<p>Error loading course details.</p>'; }
 }
+
+/**
+ * Loads the assessments (exams and assignments) for a course.
+ * @param {string} courseId The ID of the course.
+ * @param {string} userId The ID of the user.
+ */
 async function loadCourseAssessments(courseId, userId) { 
     const examsListEl = document.getElementById('exams-list');
     const assignmentsListEl = document.getElementById('assignments-list');
@@ -1199,6 +1295,14 @@ async function loadCourseAssessments(courseId, userId) {
         }); else assignmentsListEl.innerHTML += '<p>No assignments posted for this course yet.</p>';
     } catch (e) { console.error("Error loading assessments:", e); examsListEl.innerHTML+='<p>Error loading exams.</p>'; assignmentsListEl.innerHTML+='<p>Error loading assignments.</p>';}
 }
+
+/**
+ * Marks a module as complete for a user.
+ * @param {string} userId The ID of the user.
+ * @param {string} courseId The ID of the course.
+ * @param {string} moduleId The ID of the module.
+ * @param {HTMLButtonElement} button The button element that was clicked.
+ */
 async function markModuleComplete(userId, courseId, moduleId, button) { 
     const progRef = ref(db, `users/${userId}/progress/${courseId}/completedModules`);
     try {
@@ -1215,6 +1319,12 @@ async function markModuleComplete(userId, courseId, moduleId, button) {
         }
     } catch (e) { console.error("Error marking module complete:", e); alert(`Error: ${e.message}`); }
 }
+
+/**
+ * Approves a user's enrollment in a course.
+ * @param {string} userId The ID of the user.
+ * @param {string} courseIdToApprove The ID of the course to approve.
+ */
 async function approveCourseEnrollment(userId, courseIdToApprove) { 
     const userEnrollmentsRef = ref(db, `users/${userId}/enrolledCourses`);
     try {
@@ -1230,6 +1340,10 @@ async function approveCourseEnrollment(userId, courseIdToApprove) {
         } else { alert(`Could not find pending enrollment for ${courseIdToApprove}.`); }
     } catch (e) { console.error("Error approving enrollment:", e); alert(`Error: ${e.message}`); }
 }
+
+/**
+ * Loads platform news and announcements.
+ */
 async function loadPlatformNews() { 
     const el = document.getElementById('platform-news-list'); if (!el) return;
     el.innerHTML = '<li>Loading...</li>';
@@ -1248,6 +1362,10 @@ async function loadPlatformNews() {
         }, (err) => { console.error("Error loading platform news:", err); el.innerHTML = '<li>Error loading.</li>';});
     } catch (e) { console.error("Error setting up news listener:", e); el.innerHTML = '<li>Error.</li>';}
 }
+
+/**
+ * Ensures that sample data is populated in the database if it's empty.
+ */
 async function ensureSampleDataIsPopulated() { 
     try {
         const coursesSnapshot = await get(ref(db, 'courses'));
@@ -1278,7 +1396,12 @@ async function ensureSampleDataIsPopulated() {
 }
 
 // --- DOMContentLoaded Initial Setup ---
+
+/**
+ * Initializes the application after the DOM is fully loaded.
+ */
 document.addEventListener('DOMContentLoaded', async () => {
+    // Hamburger menu logic
     const hamburger = document.getElementById('hamburger-menu');
     const navLinks = document.getElementById('nav-links');
 
@@ -1298,6 +1421,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     console.log("DOMContentLoaded: START");
+    // Get DOM elements
     loginForm = document.getElementById('login-form');
     signupForm = document.getElementById('signup-form');
     logoutButton = document.getElementById('logout-button'); 
@@ -1314,12 +1438,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         chat: document.querySelector('.chat-container') // Corresponds to chat.html
     };
     
+    // Check if Firebase services are available
     if (!auth || !db) { 
         console.error("Firebase auth or db service not available on DOMContentLoaded. Check firebase-config.js.");
         return; 
     }
     storage = getStorage(auth.app); 
 
+    // Signup form event listener
     if (signupForm) { 
         signupForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -1379,6 +1505,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     }
+
+    // Login form event listener
     if (loginForm) { 
         console.log("Login form event listener ATTACHMENT attempted."); 
         loginForm.addEventListener('submit', (e) => {
@@ -1399,11 +1527,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                 });
         });
     }
+
+    // Logout button event listener
     if (logoutButton) { 
         console.log("Attaching logout listener to profile page button"); 
         logoutButton.addEventListener('click', handleLogout);
     }
     
+    // Firebase auth state change listener
     onAuthStateChanged(auth, (user) => {
         console.log("onAuthStateChanged: Event FIRED. User object:", user);
         if (user) {
@@ -1416,6 +1547,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
     
-    await ensureSampleDataIsPopulated(); // Ensure sample data exists on initial load.
+    // Ensure sample data exists on initial load
+    await ensureSampleDataIsPopulated();
     console.log("DOMContentLoaded: END"); 
 });

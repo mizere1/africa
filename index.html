@@ -1,32 +1,59 @@
+<!--
+Home page for the University Portal.
+This file includes the main navigation, authentication forms (login/signup),
+and the main content area for the home page.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - University Portal</title>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Main stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Sidenav for mobile navigation -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Home</a>
+        <a href="index.html#all-courses">Courses</a>
+        <a href="chat.html" id="student-chat-nav-link" class="hidden">Chat</a>
+        <a href="dashboard.html#platform-news-section" id="announcements-nav-link">Announcements</a>
+        <a href="admin.html" id="admin-nav-link" class="hidden">Admin</a>
+        <a href="#">Contact</a>
+        <a href="profile.html" id="profile-nav-link" class="hidden">Profile</a>
+        <a href="#" id="login-logout-mobile">Login</a>
+    </div>
+
+    <!-- Main navigation bar -->
     <nav>
         <div class="container">
+            <!-- Logo -->
             <a href="index.html" class="logo"><img src="https://res.cloudinary.com/djuhngvo7/image/upload/v1752329058/royal_african_college_transparent_1_v5gdmr.png" alt="Royal African College Logo" style="height: 40px;"></a>
-            <ul>
+            <!-- Desktop navigation links -->
+            <ul class="desktop-nav">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="index.html#all-courses">Courses</a></li>
-                <li id="student-chat-nav-link" class="hidden"><a href="chat.html">Chat</a></li>
-                <li id="announcements-nav-link"><a href="dashboard.html#platform-news-section">Announcements</a></li>
-                <li id="admin-nav-link" class="hidden"><a href="admin.html">Admin</a></li>
+                <li id="student-chat-nav-link-desktop" class="hidden"><a href="chat.html">Chat</a></li>
+                <li id="announcements-nav-link-desktop"><a href="dashboard.html#platform-news-section">Announcements</a></li>
+                <li id="admin-nav-link-desktop" class="hidden"><a href="admin.html">Admin</a></li>
                 <li><a href="#">Contact</a></li>
-                <li id="profile-nav-link" class="hidden"><a href="profile.html">Profile</a></li>
+                <li id="profile-nav-link-desktop" class="hidden"><a href="profile.html">Profile</a></li>
                 <li id="auth-status"><a href="#" id="login-logout">Login</a></li>
             </ul>
+            <!-- Hamburger menu for mobile -->
+            <span class="hamburger" onclick="openNav()">&#9776;</span>
         </div>
     </nav>
 
+    <!-- Authentication section (login/signup) -->
     <header id="auth-section" class="hidden">
         <div class="container">
             <h2>Login or Sign Up</h2>
+            <!-- Login form -->
             <form id="login-form" class="auth-form">
                 <h3>Login</h3>
                 <input type="email" id="login-email" placeholder="Email" required>
@@ -34,6 +61,7 @@
                 <button type="submit">Login</button>
             </form>
             <hr>
+            <!-- Signup form -->
             <form id="signup-form" class="auth-form">
                 <h3>Sign Up</h3>
                 <input type="text" id="signup-name" placeholder="Full Name" required>
@@ -88,19 +116,23 @@
         </div>
     </header>
 
+    <!-- Main content of the home page -->
     <main id="home-page" class="container page-content">
+        <!-- Welcome message section -->
         <section id="welcome-message" style="background-image: url('https://res.cloudinary.com/djuhngvo7/image/upload/v1752328857/ChatGPT_Image_Jul_12_2025_04_00_37_PM_oa83dd.png'); background-size: cover; background-position: center; color: white; text-shadow: 2px 2px 4px #000000;">
             <h1 style="font-size: 1.8em; margin-bottom: 0.5em;">Welcome to the University Learning Portal</h1> <!-- Adjusted style due to long signup -->
             <p>Explore our courses and start your learning journey today.</p>
         </section>
+        <!-- Available courses section -->
         <section id="all-courses">
             <h2>Available Courses</h2>
             <div id="courses-container" class="course-list">
-                <!-- Courses will be dynamically loaded here -->
+                <!-- Courses will be dynamically loaded here by app.js -->
             </div>
         </section>
     </main>
 
+    <!-- Footer section -->
     <footer>
         <div class="container">
             <p>&copy; 2024 University Portal. Inspired by MIT OpenCourseWare.</p>
@@ -134,9 +166,11 @@
         </div>
     </footer>
 
+    <!-- Scripts -->
     <!-- Firebase v11+ uses ES Modules -->
     <script type="module" src="firebase-config.js"></script>
     <script type="module" src="app.js"></script>
+    <script src="script.js"></script>
     <!-- sample-data.js will also need to be module if it imports from firebase-config.js -->
     <!-- <script type="module" src="sample-data.js"></script> -->
 </body>

@@ -1,10 +1,16 @@
+<!--
+Learning page for a specific course.
+This page displays the course content, including modules, videos, and PDFs.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Start Learning - University Portal</title>
+    <!-- Main stylesheet -->
     <link rel="stylesheet" href="style.css">
+    <!-- Inline styles for learning page specific elements -->
     <style>
         .learning-content-container {
             padding: 2em;
@@ -47,9 +53,12 @@
     </style>
 </head>
 <body class="learning-page-body">
+    <!-- Main navigation bar -->
     <nav>
         <div class="container">
+            <!-- Logo -->
             <a href="index.html" class="logo"><img src="https://res.cloudinary.com/djuhngvo7/image/upload/v1752329058/royal_african_college_transparent_1_v5gdmr.png" alt="Royal African College Logo" style="height: 40px;"></a>
+            <!-- Desktop navigation links -->
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li id="student-chat-nav-link" class="hidden"><a href="chat.html">Chat</a></li>
@@ -62,14 +71,16 @@
         </div>
     </nav>
 
+    <!-- Main content of the learning page -->
     <main id="learning-page" class="container learning-content-container">
         <h1 id="learning-course-title">Loading Course...</h1>
+        <!-- Course content will be dynamically rendered here by JavaScript -->
         <div id="learning-sections-area">
-            <!-- Course content will be dynamically rendered here by JavaScript -->
             <p>Loading content...</p>
         </div>
     </main>
 
+    <!-- Footer section -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -99,6 +110,7 @@
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script type="module" src="firebase-config.js"></script>
     <script type="module" src="app.js"></script>
 </body>
