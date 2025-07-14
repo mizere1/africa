@@ -1,0 +1,169 @@
+/* Admin Page Specifics */
+/* Admin Page Accordion Styles */
+.admin-accordion-section {
+    background-color: var(--text-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 1em;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    overflow: hidden; /* Ensures content doesn't spill out during transition */
+}
+.accordion-header {
+    cursor: pointer;
+    padding: 1em 1.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+.accordion-header:hover {
+    background-color: var(--secondary-cool-gray);
+}
+.accordion-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+.accordion-header::after {
+    content: '▼'; /* Down arrow */
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+}
+.accordion-header.active::after {
+    transform: rotate(-180deg); /* Up arrow */
+}
+.accordion-content {
+    padding: 0 1.5em 1.5em 1.5em;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease;
+}
+.accordion-content.active {
+    max-height: 5000px; /* Large value to allow for any content height */
+    overflow: visible;
+}
+.accordion-content > div:first-child,
+.accordion-content > form:first-child {
+    padding-top: 1.5em;
+    border-top: 1px solid var(--border-color);
+}
+
+@media (max-width: 768px) {
+    /* Hides the entire nav bar on the learning page on mobile for a distraction-free experience */
+    body.learning-page-body nav {
+        display: none;
+    }
+}
+#admin-page .accordion-content label {
+    display: block;
+    margin-bottom: .5em;
+    font-weight: 700; /* Lato bold */
+    color: var(--text-medium-gray);
+}
+#admin-page .accordion-content input[type="text"],
+#admin-page .accordion-content input[type="number"],
+#admin-page .accordion-content input[type="date"],
+#admin-page .accordion-content textarea,
+#admin-page .accordion-content select {
+    width: calc(100% - 24px);
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+    font-size: 1em;
+}
+#admin-page .accordion-content textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+#admin-page .accordion-content button { /* Styles admin page buttons like main .btn */
+    display: inline-block;
+    background-color: var(--accent-gold);
+    color: var(--primary-navy-blue);
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 0.95em;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 700;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+#admin-page .accordion-content button:hover {
+    background-color: var(--primary-navy-blue);
+    color: var(--text-light);
+}
+#admin-page .accordion-content #admin-selected-user-details,
+#admin-page .accordion-content #admin-pending-enrollments {
+    margin-top: 1em;
+    padding: 1em;
+    background-color: var(--secondary-cool-gray);
+    border-radius: 4px;
+}
+#admin-page .accordion-content #admin-selected-user-details p,
+#admin-page .accordion-content #admin-pending-enrollments p {
+    margin-bottom: 0.5em;
+}
+#admin-page .accordion-content #admin-selected-user-details strong {
+    color: var(--primary-navy-blue);
+}
+#admin-page .accordion-content #existing-terms-list li,
+#admin-page .accordion-content #admin-pending-enrollments li {
+    padding: 8px;
+    border-bottom: 1px dotted var(--border-color);
+}
+#admin-page .accordion-content #existing-terms-list li:last-child,
+#admin-page .accordion-content #admin-pending-enrollments li:last-child {
+    border-bottom: none;
+}
+.admin-container {
+    padding: 2em;
+}
+.form-section {
+    background-color: #f9f9f9;
+    padding: 2em;
+    border-radius: 8px;
+    margin-bottom: 2em;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.form-section h2 {
+    margin-top: 0;
+    border-bottom: 2px solid var(--mit-red);
+    padding-bottom: 0.5em;
+    color: var(--mit-red);
+}
+.form-section label {
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    font-weight: 500;
+}
+.form-section input[type="text"],
+.form-section input[type="number"],
+.form-section textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+.form-section textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+.form-section button {
+    margin-top: 1em;
+}
+#admin-course-list-container {
+    margin-top: 2em;
+}
+#admin-course-list .course-card { /* Reuse course-card style */
+    margin-bottom: 1em;
+}
