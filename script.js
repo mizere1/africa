@@ -1,11 +1,19 @@
-function openNav() {
-    document.getElementById("mySidenav").style.width = "70vw";
-    document.getElementById("main").style.marginLeft = "70vw";
-    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-}
+document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.getElementById('hamburger-menu');
+    const navLinks = document.getElementById('nav-links');
 
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("main").style.marginLeft= "0";
-    document.body.style.backgroundColor = "white";
-}
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        const links = navLinks.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+    }
+});
