@@ -636,12 +636,19 @@ function initializeAccordion() {
     const accordionHeaders = document.querySelectorAll('.accordion-header');
     accordionHeaders.forEach(header => {
         header.addEventListener('click', () => {
-            const content = header.nextElementSibling;
-            header.classList.toggle('active');
-            if (content.style.maxHeight) {
-                content.style.maxHeight = null;
-            } else {
-                content.style.maxHeight = content.scrollHeight + "px";
+            const currentContent = header.nextElementSibling;
+            const wasActive = header.classList.contains('active');
+
+            // Close all accordions
+            accordionHeaders.forEach(h => {
+                h.classList.remove('active');
+                h.nextElementSibling.style.maxHeight = null;
+            });
+
+            // If the clicked accordion was not active, open it
+            if (!wasActive) {
+                header.classList.add('active');
+                currentContent.style.maxHeight = currentContent.scrollHeight + "px";
             }
         });
     });
@@ -651,9 +658,7 @@ function initializeLearningPage(user, userData) {
     console.log("Initializing Learning Page for user:", user.uid);
     const courseId = new URLSearchParams(window.location.search).get('id');
     const courseTitleEl = document.getElementById('learning-course-title');
-    const courseTitleSidebarEl = document.getElementById('learning-course-title-sidebar');
     const sectionsAreaEl = document.getElementById('learning-sections-area');
-    const sectionsNavEl = document.getElementById('learning-sections-nav');
 
     if (!courseId) {
         courseTitleEl.textContent = "Error";
@@ -679,9 +684,7 @@ function initializeLearningPage(user, userData) {
 
         const courseData = snapshot.val();
         courseTitleEl.textContent = courseData.title;
-        courseTitleSidebarEl.textContent = courseData.title;
         sectionsAreaEl.innerHTML = ''; // Clear "Loading..." message
-        sectionsNavEl.innerHTML = '';
 
         const sections = courseData.sections || [];
         if (sections.length === 0) {
@@ -693,15 +696,8 @@ function initializeLearningPage(user, userData) {
         sections.sort((a, b) => (a.order || 0) - (b.order || 0));
 
         sections.forEach(section => {
-            // Populate sidebar
-            const navLi = document.createElement('li');
-            navLi.innerHTML = `<a href="#section-${section.sectionId}">${section.title}</a>`;
-            sectionsNavEl.appendChild(navLi);
-
-            // Populate main content
             const sectionWrapper = document.createElement('div');
             sectionWrapper.classList.add('course-section');
-            sectionWrapper.id = `section-${section.sectionId}`;
 
             const sectionTitle = document.createElement('h2');
             sectionTitle.textContent = section.title;
@@ -713,7 +709,7 @@ function initializeLearningPage(user, userData) {
                 noContent.textContent = 'No materials in this section yet.';
                 sectionWrapper.appendChild(noContent);
             } else {
-                // Sort content items by order
+                // Sort content items by order if `order` property exists
                 contentItems.sort((a, b) => (a.order || 0) - (b.order || 0));
 
                 contentItems.forEach(item => {
@@ -738,6 +734,7 @@ function initializeLearningPage(user, userData) {
                         case 'pdf':
                             contentHtml += `<p><a href="${item.url}" target="_blank" class="btn">Open PDF</a></p>`;
                             break;
+                        // Cases for assignment/exam can be added here
                         default:
                             contentHtml += `<p>Unsupported content type.</p>`;
                     }
@@ -790,21 +787,10 @@ function initializeChatPage(currentUser) {
     onChildAdded(chatMessagesQuery, (snapshot) => {
         const message = snapshot.val();
         if (message) {
-            const messageDiv = document.createElement('div');
-            messageDiv.classList.add('chat-message');
-            if (message.userId === currentUser.uid) {
-                messageDiv.classList.add('sent');
-            } else {
-                messageDiv.classList.add('received');
-            }
-            const strong = document.createElement('strong');
-            strong.textContent = message.displayName + ": ";
-            const time = document.createElement('span');
-            time.classList.add('timestamp');
-            time.textContent = new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            messageDiv.appendChild(strong);
-            messageDiv.appendChild(document.createTextNode(message.text));
-            messageDiv.appendChild(time);
+            const messageDiv = document.createElement('div'); messageDiv.classList.add('chat-message');
+            const strong = document.createElement('strong'); strong.textContent = message.displayName + ": ";
+            const time = document.createElement('span'); time.classList.add('timestamp'); time.textContent = `(${new Date(message.timestamp).toLocaleTimeString()})`;
+            messageDiv.appendChild(strong); messageDiv.appendChild(document.createTextNode(message.text)); messageDiv.appendChild(time);
             messagesArea.appendChild(messageDiv);
             messagesArea.scrollTop = messagesArea.scrollHeight;
         }
@@ -1123,34 +1109,19 @@ function loadAnnouncements(enrolledCoursesData) {
         announcementsList.innerHTML = '';
         let found = false;
         if (snapshot.exists()) {
-            const all = [];
-            snapshot.forEach(s => all.push({ id: s.key, ...s.val() }));
-            all.sort((a, b) => b.timestamp - a.timestamp).forEach(a => {
+            const all = []; snapshot.forEach(s => all.push({id:s.key, ...s.val()}));
+            all.sort((a,b) => b.timestamp - a.timestamp).forEach(a => {
                 if (enrolledCourseIds.includes(a.courseId)) {
                     const li = document.createElement('li');
                     const courseInfo = enrolledCoursesData.find(ec => ec.courseId === a.courseId);
-                    li.innerHTML = `
-                        <div class="announcement-header">
-                            <img src="https://res.cloudinary.com/djuhngvo7/image/upload/v1752329058/royal_african_college_transparent_1_v5gdmr.png" alt="Author" class="announcement-author-img">
-                            <div class="announcement-author-info">
-                                <div class="announcement-author-name">${courseInfo?.title || a.courseId}</div>
-                                <div class="announcement-timestamp">${new Date(a.timestamp).toLocaleString()}</div>
-                            </div>
-                        </div>
-                        <div class="announcement-content">${a.message.replace(/\n/g, '<br>')}</div>
-                        <div class="announcement-actions">
-                            <a href="#" class="announcement-action">Like</a>
-                            <a href="#" class="announcement-action">Comment</a>
-                            <a href="#" class="announcement-action">Share</a>
-                        </div>
-                    `;
+                    li.innerHTML = `<strong>${new Date(a.timestamp).toLocaleDateString()} - ${courseInfo?.title || a.courseId}</strong>: ${a.message}`;
                     announcementsList.appendChild(li);
                     found = true;
                 }
             });
         }
         if (!found) announcementsList.innerHTML = '<li>No new announcements for your courses.</li>';
-    }, (err) => { console.error("Error loading announcements:", err); announcementsList.innerHTML = '<li>Error loading.</li>'; });
+    }, (err) => { console.error("Error loading announcements:", err); announcementsList.innerHTML = '<li>Error loading.</li>';});
 }
 async function loadCourseDetailsWithAccessCheck(currentUser, currentUserData) { 
     console.log("loadCourseDetailsWithAccessCheck: CALLED");

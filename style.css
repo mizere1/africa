@@ -141,57 +141,6 @@ nav ul li a.active {
     text-decoration: none;
 }
 
-.hamburger-menu {
-    display: none;
-    cursor: pointer;
-}
-
-.hamburger-menu div {
-    width: 25px;
-    height: 3px;
-    background-color: white;
-    margin: 5px 0;
-}
-
-/* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1001;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 8px;
-    position: relative;
-}
-
-.close-btn {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close-btn:hover,
-.close-btn:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
 /* Auth Section (Login/Signup on Home Page) */
 header#auth-section {
     background-color: var(--text-light); /* White background for auth section */
@@ -413,7 +362,7 @@ header#auth-section.hidden {
     list-style: none;
     padding: 0;
 }
-#modules-list li, #upcoming-assignments-list li,
+#modules-list li, #announcements-list li, #platform-news-list li, #upcoming-assignments-list li,
 .assessment-item {
     background-color: var(--text-light);
     border: 1px solid var(--border-color);
@@ -421,65 +370,6 @@ header#auth-section.hidden {
     margin-bottom: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-/* LinkedIn-style Announcements */
-#announcements-list li, #platform-news-list li {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
-#announcements-list .announcement-header, #platform-news-list .announcement-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-#announcements-list .announcement-author-img, #platform-news-list .announcement-author-img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 15px;
-}
-
-#announcements-list .announcement-author-info, #platform-news-list .announcement-author-info {
-    font-family: 'Helvetica', sans-serif;
-}
-
-#announcements-list .announcement-author-name, #platform-news-list .announcement-author-name {
-    font-weight: bold;
-    color: #333;
-}
-
-#announcements-list .announcement-timestamp, #platform-news-list .announcement-timestamp {
-    color: #666;
-    font-size: 0.85em;
-}
-
-#announcements-list .announcement-content, #platform-news-list .announcement-content {
-    font-family: 'Helvetica', sans-serif;
-    line-height: 1.6;
-    color: #333;
-}
-
-#announcements-list .announcement-actions, #platform-news-list .announcement-actions {
-    margin-top: 15px;
-    display: flex;
-    gap: 20px;
-}
-
-#announcements-list .announcement-action, #platform-news-list .announcement-action {
-    color: #666;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-#announcements-list .announcement-action:hover, #platform-news-list .announcement-action:hover {
-    color: #0073b1;
 }
 #modules-list li { /* Module item specific flex for button alignment */
     display: flex;
@@ -615,33 +505,28 @@ footer {
     }
 
     nav .container {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
+        align-items: center; /* Center nav items */
+    }
+    nav .logo {
+        margin-bottom: 10px;
     }
 
-    .hamburger-menu {
-        display: block;
-    }
-
-    #nav-links {
-        display: none;
+    nav ul {
+        margin-top: 10px;
         flex-direction: column;
         width: 100%;
-        background-color: var(--primary-navy-blue);
-        position: absolute;
-        top: 60px;
-        left: 0;
-        padding: 1em 0;
     }
 
-    #nav-links.active {
-        display: flex;
-    }
-
-    #nav-links li {
-        margin: 10px 0;
+    nav ul li {
+        margin-left: 0;
+        margin-bottom: 8px;
+        width: 100%;
         text-align: center;
+    }
+    nav ul li a {
+        display: block;
+        padding: 10px 0;
     }
 
     .course-list {
@@ -730,6 +615,54 @@ footer {
     font-weight: 700;
     color: var(--accent-gold);
     margin: 0;
+}
+
+/* Admin Page Accordion Styles */
+.admin-accordion-section {
+    background-color: var(--text-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 1em;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    overflow: hidden; /* Ensures content doesn't spill out during transition */
+}
+.accordion-header {
+    cursor: pointer;
+    padding: 1em 1.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+.accordion-header:hover {
+    background-color: var(--secondary-cool-gray);
+}
+.accordion-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+.accordion-header::after {
+    content: '▼'; /* Down arrow */
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+}
+.accordion-header.active::after {
+    transform: rotate(-180deg); /* Up arrow */
+}
+.accordion-content {
+    padding: 0 1.5em 1.5em 1.5em;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease;
+}
+.accordion-content.active {
+    max-height: 5000px; /* Large value to allow for any content height */
+    overflow: visible;
+}
+.accordion-content > div:first-child,
+.accordion-content > form:first-child {
+    padding-top: 1.5em;
+    border-top: 1px solid var(--border-color);
 }
 
 /* Admin Page Specifics */
@@ -857,16 +790,16 @@ footer {
 }
 
 
-/* WhatsApp-like Chat Styles */
+/* Chat Page Specifics */
 .chat-container {
     max-width: 800px;
     margin: 20px auto;
-    background-color: #E5DDD5; /* WhatsApp background color */
+    background-color: var(--text-light); /* White background for chat area */
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 180px);
+    height: calc(100vh - 180px); /* Adjust based on nav/footer height */
     min-height: 400px;
 }
 
@@ -874,163 +807,72 @@ footer {
     flex-grow: 1;
     padding: 20px;
     overflow-y: auto;
-    display: flex;
-    flex-direction: column;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .chat-message {
     margin-bottom: 15px;
     padding: 10px 15px;
-    border-radius: 7.5px;
+    border-radius: 15px;
     max-width: 75%;
     word-wrap: break-word;
-    position: relative;
 }
 
-.chat-message strong {
-    font-family: 'Helvetica', sans-serif;
-    font-weight: bold;
-    color: #333;
+.chat-message strong { /* Merriweather for names */
+    font-family: 'Merriweather', serif;
+    color: var(--primary-navy-blue);
     margin-right: 5px;
 }
-
-.chat-message .timestamp {
-    font-size: 0.75em;
-    color: #999;
-    position: absolute;
-    bottom: 5px;
-    right: 10px;
+.chat-message .timestamp { /* Lato for timestamp */
+    font-size: 0.8em;
+    color: var(--text-medium-gray);
+    margin-left: 10px;
 }
 
-.chat-message.sent {
-    background-color: #DCF8C6; /* Sent message color */
-    align-self: flex-end;
-}
-
-.chat-message.received {
-    background-color: #FFF; /* Received message color */
+/* Basic differentiation, can be enhanced if current user ID is available in JS to add a class */
+.chat-message:nth-child(odd) { /* Example styling */
+    background-color: var(--secondary-cool-gray); /* Light gray for other messages */
     align-self: flex-start;
+    border-bottom-left-radius: 0;
 }
+.chat-message:nth-child(even) { /* Example styling for "own" messages - needs JS to be accurate */
+    background-color: #D1E8FF; /* Light blue for own messages - placeholder */
+    align-self: flex-end;
+    margin-left: auto; /* Push to right */
+    border-bottom-right-radius: 0;
+}
+
 
 #chat-input-area {
     display: flex;
-    padding: 10px;
-    background-color: #F0F0F0;
-    border-top: 1px solid #DDD;
+    padding: 15px;
+    background-color: #f9f9f9; /* Slightly off-white for input area */
+    border-top: 1px solid var(--border-color);
 }
 
 #chat-message-input {
     flex-grow: 1;
-    padding: 10px 15px;
-    border: 1px solid #DDD;
+    padding: 12px;
+    border: 1px solid var(--border-color);
     border-radius: 20px;
     margin-right: 10px;
-    font-family: 'Helvetica', sans-serif;
+    font-family: 'Lato', sans-serif;
     font-size: 1em;
 }
 
 #send-chat-message-btn {
-    background-color: #128C7E; /* WhatsApp send button color */
-    color: #FFF;
-    padding: 10px 15px;
+    background-color: var(--accent-gold);
+    color: var(--primary-navy-blue);
+    padding: 12px 20px;
     border: none;
-    border-radius: 50%;
+    border-radius: 20px;
     cursor: pointer;
-    font-weight: bold;
-    font-family: 'Helvetica', sans-serif;
-    transition: background-color 0.3s ease;
+    font-weight: 700; /* Lato bold */
+    font-family: 'Lato', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #send-chat-message-btn:hover {
-    background-color: #075E54;
-}
-
-/* Learning Platform Enhancements */
-.learning-page-body {
-    background-color: #f9f9f9;
-}
-
-.learning-content-container {
-    display: flex;
-    gap: 20px;
-    padding: 2em;
-}
-
-#learning-sidebar {
-    width: 250px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    height: fit-content;
-}
-
-#learning-sidebar h3 {
-    font-size: 1.2em;
-    margin-bottom: 15px;
-}
-
-#learning-sidebar ul {
-    list-style: none;
-    padding: 0;
-}
-
-#learning-sidebar li a {
-    display: block;
-    padding: 10px;
-    border-radius: 5px;
-    color: #333;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-}
-
-#learning-sidebar li a:hover,
-#learning-sidebar li a.active {
     background-color: var(--primary-navy-blue);
-    color: #fff;
-}
-
-#learning-main-content {
-    flex-grow: 1;
-}
-
-.course-section {
-    margin-bottom: 2.5em;
-}
-
-.course-section h2 {
-    border-bottom: 2px solid var(--primary-navy-blue);
-    padding-bottom: 0.5em;
-    margin-bottom: 1em;
-}
-
-.content-item {
-    background-color: var(--text-light);
-    padding: 1.5em;
-    margin-bottom: 1em;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.07);
-}
-
-.content-item h4 {
-    margin-top: 0;
-    color: var(--primary-navy-blue);
-}
-
-.content-item-video-embed {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-    background: #000;
-    margin-top: 1em;
-}
-
-.content-item-video-embed iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    color: var(--text-light);
 }
